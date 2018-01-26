@@ -5,16 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#ifndef AUTO_COMMAND_HPP
+#define AUTO_COMMAND_HPP
 
 #include <Commands/Command.h>
 
 class AutoCommand : public frc::Command {
 public:
-	AutoCommand();
-	void Initialize() override;
-	void Execute() override;
-	bool IsFinished() override;
-	void End() override;
-	void Interrupted() override;
+    AutoCommand();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
 };
+
+#endif

@@ -5,12 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "OI.hpp"
+#ifndef OI_HPP
+#define OI_HPP
 
-OI::OI() {
-    joystick1 = std::make_shared<frc::Joystick>(0);
-}
+#include <Joystick.h>
 
-std::shared_ptr<frc::Joystick> OI::get_joystick1() {
-    return joystick1;
-}
+class OI {
+    public:
+        OI();
+        std::shared_ptr<frc::Joystick> get_joystick1();
+    private:
+        std::shared_ptr<frc::Joystick> joystick1;
+};
+
+#endif

@@ -5,12 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Robot.h"
+#include "Robot.hpp"
+
+std::shared_ptr<DriveSubsystem> Robot::drive_subsystem = nullptr;
+std::unique_ptr<OI> Robot::oi = nullptr;
 
 void Robot::RobotInit() {
-     //chooser.AddDefault("Default Auto", auto_command);
-     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
-     auto_command = nullptr;
+    //chooser.AddDefault("Default Auto", auto_command);
+    //frc::SmartDashboard::PutData("Auto Modes", &chooser);
+    RobotMap::init();
+    drive_subsystem = std::make_shared<DriveSubsystem>();
+    oi = std::make_unique<OI>();
 }
 
 /**
@@ -23,7 +28,7 @@ void Robot::RobotInit() {
 void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {
-     frc::Scheduler::GetInstance()->Run();
+    frc::Scheduler::GetInstance()->Run();
 }
 
 /**
@@ -41,30 +46,31 @@ void Robot::DisabledPeriodic() {
  * to the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-     //std::string autoSelected = frc::SmartDashboard::GetString(
-               //"Auto Selector", "Default");
-     if (auto_command != nullptr) {
-          auto_command->Start();
-     }
+    //std::string autoSelected = frc::SmartDashboard::GetString(
+              //"Auto Selector", "Default");
+    if (auto_command != nullptr) {
+         auto_command->Start();
+    }
 }
 
 void Robot::AutonomousPeriodic() {
-     frc::Scheduler::GetInstance()->Run();
+    frc::Scheduler::GetInstance()->Run();
 }
 
 void Robot::TeleopInit() {
-     // This makes sure that the autonomous stops running when
-     // teleop starts running. If you want the autonomous to
-     // continue until interrupted by another command, remove
-     // this line or comment it out.
-     if (auto_command != nullptr) {
-          auto_command->Cancel();
-          auto_command = nullptr;
-     }
+    // This makes sure that the autonomous stops running when
+    // teleop starts running. If you want the autonomous to
+    // continue until interrupted by another command, remove
+    // this line or comment it out.
+    if (auto_command != nullptr) {
+         auto_command->Cancel();
+         auto_command = nullptr;
+    }
+    drive_command->Start();
 }
 
 void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); }
 
 void Robot::TestPeriodic() {}
 
-START_ROBOT_CLASS(Robot)
+START_ROBOT_CLASS(Robot);

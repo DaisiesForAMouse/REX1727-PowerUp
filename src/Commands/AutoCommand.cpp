@@ -5,11 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "AutoCommand.h"
+#include "AutoCommand.hpp"
 
 AutoCommand::AutoCommand() {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(&Robot::chassis);
+    // Use Requires() here to declare subsystem dependencies
+    // eg. Requires(&Robot::chassis);
 }
 
 // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ void AutoCommand::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutoCommand::IsFinished() {
-	return false;
+    return false;
 }
 
 // Called once after isFinished returns true
