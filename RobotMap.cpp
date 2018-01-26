@@ -18,5 +18,5 @@ void RobotMap::init() {
 
     left_drive_enc = std::make_shared<frc::Encoder>(0, 1, true);
     right_drive_enc = std::make_shared<frc::Encoder>(2, 3, false);
-    std::cout << "RobotMap::init ended.";
+    std::cout << "RobotMap::init() ended.";
 }
