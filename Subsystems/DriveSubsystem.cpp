@@ -6,8 +6,8 @@ DriveSubsystem::DriveSubsystem() : frc::Subsystem("DriveSubsystem") {
     tank_drive = RobotMap::tank_drive;
 }
 
-void DriveSubsystem::set_drive(double left, double right) {
-    tank_drive->TankDrive(left, right, true);
+void DriveSubsystem::set_drive_raw(double left, double right, bool squared) {
+    tank_drive->TankDrive(left, right, squared);
 }
 
 void DriveSubsystem::InitDefaultCommand() {

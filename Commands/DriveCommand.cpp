@@ -9,8 +9,8 @@ void DriveCommand::Initialize() {
 }
 
 void DriveCommand::Execute() {
-    Robot::drive_subsystem->set_drive(Robot::oi->get_joystick1()->GetRawAxis(0),
-                                      Robot::oi->get_joystick1()->GetRawAxis(1));
+    Robot::drive_subsystem->set_drive_raw(Robot::oi->get_joystick1()->GetRawAxis(1),
+                                          Robot::oi->get_joystick1()->GetRawAxis(5));
 }
 
 bool DriveCommand::IsFinished() {

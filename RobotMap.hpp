@@ -10,8 +10,9 @@
 
 #include <memory>
 
-#include <Spark.h>
 #include <Drive/DifferentialDrive.h>
+#include <Spark.h>
+#include <Encoder.h>
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -35,6 +36,8 @@ class RobotMap {
         static std::shared_ptr<frc::Spark> left_drive;
         static std::shared_ptr<frc::Spark> right_drive;
         static std::shared_ptr<frc::DifferentialDrive> tank_drive;
+        static std::shared_ptr<frc::Encoder> left_drive_enc;
+        static std::shared_ptr<frc::Encoder> right_drive_enc;
         static void init();
 };
 

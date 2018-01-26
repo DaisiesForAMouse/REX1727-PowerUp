@@ -13,7 +13,7 @@ class DriveSubsystem: public frc::Subsystem {
         DriveSubsystem();
         void InitDefaultCommand() override;
         void Periodic() override;
-        void set_drive(double, double);
+        void set_drive_raw(double left, double right, bool squared = true);
     private:
         std::shared_ptr<frc::Spark> left_drive;
         std::shared_ptr<frc::Spark> right_drive;
