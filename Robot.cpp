@@ -11,7 +11,7 @@ void Robot::RobotInit() {
      //chooser.AddDefault("Default Auto", auto_command);
      //frc::SmartDashboard::PutData("Auto Modes", &chooser);
      auto_command = nullptr;
-     wear_subsystem = std::make_shared<WearSubsystem>(WearSubsystem()); 
+     wear_subsystem = std::make_unique<WearSubsystem>(); 
 }
 
 /**

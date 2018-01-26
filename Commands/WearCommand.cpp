@@ -7,7 +7,7 @@
 
 #include "WearCommand.h"
 #include "../Robot.h"
-#include "../Subsystems/WearSubsystem.cpp"
+#include "../Subsystems/WearSubsystem.h"
 
 WearCommand::WearCommand() {
     // Use Requires() here to declare subsystem dependencies
