@@ -16,6 +16,7 @@ void Robot::RobotInit() {
     RobotMap::init();
     oi = std::make_unique<OI>();
     auto_command = nullptr;
+    drive_command = new DriveCommand();
     drive_subsystem = std::make_shared<DriveSubsystem>();
 }
 
@@ -69,6 +70,8 @@ void Robot::TeleopInit() {
     }
     if (drive_command != nullptr) {
         drive_command->Start();
+    } else {
+    	std::cout << "DriveCommand not started.";
     }
 }
 
