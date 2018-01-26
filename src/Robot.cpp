@@ -11,7 +11,6 @@ void Robot::RobotInit() {
      //chooser.AddDefault("Default Auto", auto_command);
      //frc::SmartDashboard::PutData("Auto Modes", &chooser);
      auto_command = nullptr;
-     wear_subsystem = std::make_unique<WearSubsystem>(); 
 }
 
 /**
@@ -62,7 +61,6 @@ void Robot::TeleopInit() {
           auto_command->Cancel();
           auto_command = nullptr;
      }
-     wear_command.Start();
 }
 
 void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); }

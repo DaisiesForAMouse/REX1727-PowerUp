@@ -9,8 +9,6 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <TimedRobot.h>
 
-#include "Commands/WearCommand.h"
-#include "Subsystems/WearSubsystem.h"
 
 class Robot : public frc::TimedRobot {
     public:
@@ -23,9 +21,7 @@ class Robot : public frc::TimedRobot {
         void TeleopPeriodic() override;
         void TestPeriodic() override;
         
-        static std::unique_ptr<WearSubsystem> wear_subsystem;
     private:
         std::shared_ptr<frc::Command> auto_command;
-        WearCommand wear_command;
         frc::SendableChooser<std::shared_ptr<frc::Command>> chooser;
 };
