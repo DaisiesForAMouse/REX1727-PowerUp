@@ -2,6 +2,7 @@
 #define ROBOT_HPP
 
 #include <memory>
+#include <iostream>
 
 #include "Commands/Command.h"
 #include "Commands/Scheduler.h"
@@ -11,14 +12,15 @@
 #include "TimedRobot.h"
 
 #include "Commands/DriveCommand.hpp"
+#include "Commands/AutoCommand.hpp" 
 #include "Subsystems/DriveSubsystem.hpp"
 #include "RobotMap.hpp"
 #include "OI.hpp"
 
 class Robot : public frc::TimedRobot {
     public:
-        frc::Command* drive_command; 
-        frc::Command* auto_command;
+        DriveCommand drive_command;
+        AutoCommand auto_command;
 
         static std::unique_ptr<OI> oi;
         static std::shared_ptr<DriveSubsystem> drive_subsystem;

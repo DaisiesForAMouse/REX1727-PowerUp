@@ -15,8 +15,6 @@ void Robot::RobotInit() {
     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
     RobotMap::init();
     oi = std::make_unique<OI>();
-    auto_command = nullptr;
-    drive_command = new DriveCommand();
     drive_subsystem = std::make_shared<DriveSubsystem>();
 }
 
@@ -50,9 +48,7 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
     //std::string autoSelected = frc::SmartDashboard::GetString(
               //"Auto Selector", "Default");
-    if (auto_command != nullptr) {
-         auto_command->Start();
-    }
+    //auto_command.Start();
 }
 
 void Robot::AutonomousPeriodic() {
@@ -64,15 +60,8 @@ void Robot::TeleopInit() {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (auto_command != nullptr) {
-        auto_command->Cancel();
-        auto_command = nullptr;
-    }
-    if (drive_command != nullptr) {
-        drive_command->Start();
-    } else {
-    	std::cout << "DriveCommand not started.";
-    }
+    auto_command.Cancel();
+    drive_command.Start();
 }
 
 void Robot::TeleopPeriodic() {
