@@ -8,7 +8,9 @@
 #include "OI.hpp"
 
 OI::OI() {
+    std::cout << "OI constructor called...";
     joystick1 = std::make_shared<frc::Joystick>(0);
+    std::cout << "OI constrcutor finished.";
 }
 
 std::shared_ptr<frc::Joystick> OI::get_joystick1() {

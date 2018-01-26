@@ -18,7 +18,7 @@
 class Robot : public frc::TimedRobot {
     public:
         frc::Command* drive_command; 
-        frc::Command* auto_command = nullptr;
+        frc::Command* auto_command;
 
         static std::unique_ptr<OI> oi;
         static std::shared_ptr<DriveSubsystem> drive_subsystem;

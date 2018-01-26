@@ -9,6 +9,7 @@
 #define ROBOT_MAP_HPP
 
 #include <memory>
+#include <iostream>
 
 #include <Drive/DifferentialDrive.h>
 #include <Spark.h>

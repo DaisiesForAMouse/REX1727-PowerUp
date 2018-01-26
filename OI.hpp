@@ -8,6 +8,8 @@
 #ifndef OI_HPP
 #define OI_HPP
 
+#include <iostream>
+
 #include <Joystick.h>
 
 class OI {

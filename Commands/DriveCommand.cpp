@@ -5,12 +5,13 @@ DriveCommand::DriveCommand() : frc::Command() {
 }
 
 void DriveCommand::Initialize() {
-
+    std::cout << "DriveCommand initialized.";
 }
 
 void DriveCommand::Execute() {
-    Robot::drive_subsystem->set_drive_raw(Robot::oi->get_joystick1()->GetRawAxis(1),
-                                          Robot::oi->get_joystick1()->GetRawAxis(5));
+    auto joy = Robot::oi->get_joystick1();
+    Robot::drive_subsystem->set_drive_raw(joy->GetRawAxis(1),
+                                          joy->GetRawAxis(5));
 }
 
 bool DriveCommand::IsFinished() {

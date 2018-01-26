@@ -7,15 +7,16 @@
 
 #include "Robot.hpp"
 
-std::shared_ptr<DriveSubsystem> Robot::drive_subsystem = nullptr;
-std::unique_ptr<OI> Robot::oi = nullptr;
+std::shared_ptr<DriveSubsystem> Robot::drive_subsystem;
+std::unique_ptr<OI> Robot::oi;
 
 void Robot::RobotInit() {
     //chooser.AddDefault("Default Auto", auto_command);
     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
     RobotMap::init();
-    drive_subsystem = std::make_shared<DriveSubsystem>();
     oi = std::make_unique<OI>();
+    auto_command = nullptr;
+    drive_subsystem = std::make_shared<DriveSubsystem>();
 }
 
 /**
@@ -63,10 +64,12 @@ void Robot::TeleopInit() {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     if (auto_command != nullptr) {
-         auto_command->Cancel();
-         auto_command = nullptr;
+        auto_command->Cancel();
+        auto_command = nullptr;
     }
-    drive_command->Start();
+    if (drive_command != nullptr) {
+        drive_command->Start();
+    }
 }
 
 void Robot::TeleopPeriodic() {
