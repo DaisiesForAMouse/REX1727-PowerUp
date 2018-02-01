@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(Robot)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Debug)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 set(WPI_DIR $ENV{HOME}/wpilib)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++1y -Wall -fmessage-length=0 -pthread")
