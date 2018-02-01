@@ -7,7 +7,7 @@
 
 #include "Robot.hpp"
 
-std::shared_ptr<DriveSubsystem> Robot::drive_subsystem;
+std::unique_ptr<DriveSubsystem> Robot::drive_subsystem;
 std::unique_ptr<OI> Robot::oi;
 
 void Robot::RobotInit() {
@@ -15,7 +15,8 @@ void Robot::RobotInit() {
     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
     RobotMap::init();
     oi = std::make_unique<OI>();
-    drive_subsystem = std::make_shared<DriveSubsystem>();
+    drive_subsystem = std::make_unique<DriveSubsystem>();
+    drive_command = std::make_shared<DriveCommand>();
 }
 
 /**
@@ -56,12 +57,7 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    auto_command.Cancel();
-    drive_command.Start();
+    drive_command->Start();
 }
 
 void Robot::TeleopPeriodic() {

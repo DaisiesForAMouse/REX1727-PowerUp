@@ -4,12 +4,9 @@
 #include <memory>
 #include <iostream>
 
-#include "Commands/Command.h"
-#include "Commands/Scheduler.h"
-#include "LiveWindow/LiveWindow.h"
-#include "SmartDashboard/SendableChooser.h"
-#include "SmartDashboard/SmartDashboard.h"
-#include "TimedRobot.h"
+#include <Commands/Command.h>
+#include <Commands/Scheduler.h>
+#include <TimedRobot.h>
 
 #include "Commands/DriveCommand.hpp"
 #include "Commands/AutoCommand.hpp" 
@@ -19,11 +16,10 @@
 
 class Robot : public frc::TimedRobot {
     public:
-        DriveCommand drive_command;
-        AutoCommand auto_command;
-
+        std::shared_ptr<frc::Command> drive_command;
+        
         static std::unique_ptr<OI> oi;
-        static std::shared_ptr<DriveSubsystem> drive_subsystem;
+        static std::unique_ptr<DriveSubsystem> drive_subsystem;
 
         void RobotInit() override;
         void DisabledInit() override;
