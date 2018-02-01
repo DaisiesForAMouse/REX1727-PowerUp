@@ -14,6 +14,7 @@
 #include <Drive/DifferentialDrive.h>
 #include <Spark.h>
 #include <Encoder.h>
+#include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -39,6 +40,8 @@ class RobotMap {
         static std::shared_ptr<frc::DifferentialDrive> tank_drive;
         static std::shared_ptr<frc::Encoder> left_drive_enc;
         static std::shared_ptr<frc::Encoder> right_drive_enc;
+        static std::shared_ptr<ctre::phoenix::motorcontrol::can::TalonSRX> left_climber;
+        static std::shared_ptr<ctre::phoenix::motorcontrol::can::TalonSRX> right_climber;
         static void init();
 };
 
