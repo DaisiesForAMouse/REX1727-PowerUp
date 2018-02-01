@@ -1,7 +1,7 @@
 #ifndef DRIVE_COMMAND_HPP
 #define DRIVE_COMMAND_HPP
 
-#include "Commands/Subsystem.h"
+#include "Commands/Command.h"
 #include "../Robot.hpp"
 
 class DriveCommand: public frc::Command {
@@ -13,7 +13,6 @@ class DriveCommand: public frc::Command {
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
-    private:
 };
 
 #endif

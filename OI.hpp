@@ -10,14 +10,14 @@
 
 #include <iostream>
 
-#include <Joystick.h>
+#include <XboxController.h>
 
 class OI {
     public:
         OI();
-        std::shared_ptr<frc::Joystick> get_joystick1();
+        std::shared_ptr<frc::XboxController> get_joystick1();
     private:
-        std::shared_ptr<frc::Joystick> joystick1;
+        std::shared_ptr<frc::XboxController> xbox_controller;
 };
 
 #endif

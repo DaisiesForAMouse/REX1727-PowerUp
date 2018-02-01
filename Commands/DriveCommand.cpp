@@ -9,10 +9,9 @@ void DriveCommand::Initialize() {
 }
 
 void DriveCommand::Execute() {
-	std::cout << "DriveCommand executing...";
     auto joy = Robot::oi->get_joystick1();
-    Robot::drive_subsystem->set_drive_raw(joy->GetRawAxis(1),
-                                          joy->GetRawAxis(5));
+    Robot::drive_subsystem->set_drive_raw(joy->GetY(frc::GenericHID::kLeftHand),
+                                          joy->GetY(frc::GenericHID::kRightHand));
 }
 
 bool DriveCommand::IsFinished() {
