@@ -23,6 +23,8 @@ if [ $mDNS -ne 0 ]; then
         if [ $ethernet -ne 0 ] ; then
             echo "Connection failed on 10.$team_ip.2."
             echo "Connection to roboRIO failed."
+            echo "deploy.sh: Exiting deploy process..."
+            exit 1
         else
             ssh "lvuser@10.$team_ip.2" "killall -9 FRCUserProgram && rm ~/FRCUserProgram && exit"
 
