@@ -1,8 +1,11 @@
 #!/bin/bash
 
+cur=`pwd`
 echo "build.sh: Starting build process..."
 
-rm -rf build
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $dir
+rm "FRCUserProgram"
 mkdir build
 cd build
 
@@ -27,7 +30,7 @@ fi
 
 cd ..
 
-mv $target "FRCUserProgram"
+cp $target "FRCUserProgram"
 
 if [ -f "FRCUserProgram" ]; then
     echo "build.sh: Built successfully!"
@@ -37,4 +40,5 @@ else
     exit 1
 fi
 
+cd $cur
 exit
