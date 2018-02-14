@@ -10,10 +10,16 @@
 
 #include <memory>
 #include <iostream>
+#include <cmath>
 
 #include <Drive/DifferentialDrive.h>
 #include <Spark.h>
 #include <Encoder.h>
+#include <PIDController.h>
+#include <DoubleSolenoid.h>
+#include <VictorSP.h>
+#include <PowerDistributionPanel.h>
+#include <Compressor.h>
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 
 /**
@@ -23,25 +29,31 @@
  * floating around.
  */
 
-// For example to map the left and right motors, you could define the
-// following variables to use with your drivetrain subsystem.
-// constexpr int kLeftMotor = 1;
-// constexpr int kRightMotor = 2;
-
-// If you are using multiple modules, make sure to define both the port
-// number and the module. For example you with a rangefinder:
-// constexpr int kRangeFinderPort = 1;
-// constexpr int kRangeFinderModule = 1;
+namespace ctre {
+    typedef ctre::phoenix::motorcontrol::can::TalonSRX CANTalonSRX;
+}
 
 class RobotMap {
     public:
         static std::shared_ptr<frc::Spark> left_drive;
         static std::shared_ptr<frc::Spark> right_drive;
-        static std::shared_ptr<frc::DifferentialDrive> tank_drive;
         static std::shared_ptr<frc::Encoder> left_drive_enc;
         static std::shared_ptr<frc::Encoder> right_drive_enc;
-        static std::shared_ptr<ctre::phoenix::motorcontrol::can::TalonSRX> left_climber;
-        static std::shared_ptr<ctre::phoenix::motorcontrol::can::TalonSRX> right_climber;
+        static std::shared_ptr<frc::DifferentialDrive> tank_drive;
+        static std::shared_ptr<frc::PIDController> left_drive_vel_PID;
+        static std::shared_ptr<frc::PIDController> left_drive_dist_PID;
+        static std::shared_ptr<frc::PIDController> right_drive_vel_PID;
+        static std::shared_ptr<frc::PIDController> right_drive_dist_PID;
+        static std::shared_ptr<frc::VictorSP> left_climber;
+        static std::shared_ptr<frc::VictorSP> right_climber;
+        static std::shared_ptr<frc::DoubleSolenoid> arm_solenoid;
+        static std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;
+        static std::shared_ptr<ctre::CANTalonSRX> right_internal_intake;
+        static std::shared_ptr<frc::Spark> left_external_intake;
+        static std::shared_ptr<frc::Spark> right_external_intake;
+        static std::shared_ptr<frc::PowerDistributionPanel> pdp;
+        static std::shared_ptr<frc::Compressor> compressor;
+
         static void init();
 };
 
