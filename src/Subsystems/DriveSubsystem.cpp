@@ -8,7 +8,7 @@ DriveSubsystem::DriveSubsystem() : frc::Subsystem("DriveSubsystem") {
     std::cout << "DriveSubsystem constructor ended.";
 }
 
-void DriveSubsystem::set_drive_raw(double left, double right, bool squared) {
+void DriveSubsystem::SetDriveRaw(double left, double right, bool squared) {
     tank_drive->TankDrive(left, right, squared);
 }
 

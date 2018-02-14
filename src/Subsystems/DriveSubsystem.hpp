@@ -2,9 +2,9 @@
 #define DRIVE_SUBSYSTEM_HPP
 
 
-#include "Commands/Subsystem.h"
-#include "Drive/DifferentialDrive.h"
-#include "Spark.h"
+#include <Commands/Subsystem.h>
+#include <Drive/DifferentialDrive.h>
+#include <Spark.h>
 
 #include "../RobotMap.hpp"
 
@@ -13,7 +13,7 @@ class DriveSubsystem: public frc::Subsystem {
         DriveSubsystem();
         void InitDefaultCommand() override;
         void Periodic() override;
-        void set_drive_raw(double left, double right, bool squared = true);
+        void SetDriveRaw(double left, double right, bool squared = true);
     private:
         std::shared_ptr<frc::Spark> left_drive;
         std::shared_ptr<frc::Spark> right_drive;
