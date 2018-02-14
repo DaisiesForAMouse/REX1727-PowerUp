@@ -1,20 +1,20 @@
-#ifndef DRIVE_COMMAND_HPP
-#define DRIVE_COMMAND_HPP
+#ifndef INTAKE_COMMAND_HPP
+#define INTAKE_COMMAND_HPP
 
-#include "Commands/Command.h"
+#include <Commands/Command.h>
+
 #include "../Robot.hpp"
+#include "../Subsystems/IntakeSubsystem.hpp"
 
-class DriveCommand: public frc::Command {
+class IntakeCommand : public frc::Command {
     public:
-        DriveCommand();
+        IntakeCommand();
 
         void Initialize() override;
         void Execute() override;
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
-    private:
-        std::deque<double> currents;
 };
 
 #endif

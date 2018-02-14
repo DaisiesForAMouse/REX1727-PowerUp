@@ -10,6 +10,9 @@
 AutoCommand::AutoCommand() {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(&Robot::chassis);
+    Requires(Robot::arm_subsystem.get());
+    Requires(Robot::drive_subsystem.get());
+    Requires(Robot::intake_subsystem.get());
 }
 
 // Called just before this Command runs the first time

@@ -9,6 +9,7 @@
 #define AUTO_COMMAND_HPP
 
 #include <Commands/Command.h>
+#include "../Robot.hpp"
 
 class AutoCommand : public frc::Command {
 public:

@@ -1,12 +1,15 @@
-#ifndef DRIVE_COMMAND_HPP
-#define DRIVE_COMMAND_HPP
+#ifndef RUMBLE_COMMAND_HPP
+#define RUMBLE_COMMAND_HPP
+
+#include <deque>
+#include <cmath>
 
 #include "Commands/Command.h"
 #include "../Robot.hpp"
 
-class DriveCommand: public frc::Command {
+class RumbleCommand: public frc::Command {
     public:
-        DriveCommand();
+        RumbleCommand();
 
         void Initialize() override;
         void Execute() override;
