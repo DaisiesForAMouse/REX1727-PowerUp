@@ -9,14 +9,22 @@
 #define OI_HPP
 
 #include <iostream>
+#include <functional>
 
 #include <XboxController.h>
+#include <LiveWindow/LiveWindow.h>
+#include <SmartDashboard/Sendable.h>
+
+#include "RobotMap.hpp"
 
 class OI {
     public:
         OI();
-        std::shared_ptr<frc::XboxController> get_joystick1();
+        ~OI();
+        std::shared_ptr<frc::XboxController> GetXboxController();
+        void SetLiveWindow();
     private:
+        static void DestroyWindow(frc::LiveWindow*);
         std::shared_ptr<frc::XboxController> xbox_controller;
 };
 

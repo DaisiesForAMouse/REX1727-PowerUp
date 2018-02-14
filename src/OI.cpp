@@ -13,6 +13,15 @@ OI::OI() {
     std::cout << "OI constructor finished." << std::endl;
 }
 
-std::shared_ptr<frc::XboxController> OI::get_joystick1() {
+OI::~OI() {
+}
+
+std::shared_ptr<frc::XboxController> OI::GetXboxController() {
     return xbox_controller;
+}
+
+void OI::SetLiveWindow() {
+    auto lw = frc::LiveWindow::GetInstance();
+    lw->Add(RobotMap::right_drive_dist_PID);
+    lw->Add(RobotMap::left_drive_vel_PID);
 }
