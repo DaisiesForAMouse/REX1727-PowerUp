@@ -7,16 +7,32 @@
 
 #include "Robot.hpp"
 
-std::unique_ptr<DriveSubsystem> Robot::drive_subsystem;
 std::unique_ptr<OI> Robot::oi;
+std::unique_ptr<DriveSubsystem> Robot::drive_subsystem;
+std::unique_ptr<ArmSubsystem> Robot::arm_subsystem;
+std::unique_ptr<IntakeSubsystem> Robot::intake_subsystem;
 
 void Robot::RobotInit() {
     //chooser.AddDefault("Default Auto", auto_command);
     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
     RobotMap::init();
+    RobotMap::compressor->Stop();
+
     oi = std::make_unique<OI>();
+    oi->SetLiveWindow();
+
     drive_subsystem = std::make_unique<DriveSubsystem>();
     drive_command = std::make_shared<DriveCommand>();
+
+    arm_subsystem = std::make_unique<ArmSubsystem>();
+    arm_command = std::make_shared<ArmCommand>();
+
+    intake_subsystem = std::make_unique<IntakeSubsystem>();
+    intake_command = std::make_shared<IntakeCommand>();
+
+    auto_command = std::make_shared<AutoCommand>();
+
+    rumble_command = std::make_shared<RumbleCommand>();
 }
 
 /**
@@ -30,6 +46,7 @@ void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {
     frc::Scheduler::GetInstance()->Run();
+    RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
 }
 
 /**
@@ -49,7 +66,7 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
     //std::string autoSelected = frc::SmartDashboard::GetString(
               //"Auto Selector", "Default");
-    //auto_command.Start();
+    auto_command->Start();
 }
 
 void Robot::AutonomousPeriodic() {
@@ -57,7 +74,12 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
+    auto_command->Cancel();
     drive_command->Start();
+    arm_command->Start();
+    intake_command->Start();
+    //rumble_command->Start();
+    std::cout << "Starting solenoids...";
 }
 
 void Robot::TeleopPeriodic() {
