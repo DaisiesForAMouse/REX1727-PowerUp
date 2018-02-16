@@ -10,8 +10,7 @@
 
 #include "Commands/AutoCommand.hpp"
 #include "Commands/DriveCommand.hpp"
-#include "Commands/ArmCommand.hpp"
-#include "Commands/IntakeCommand.hpp"
+#include "Commands/CubeCommand.hpp"
 #include "Commands/RumbleCommand.hpp"
 #include "Subsystems/DriveSubsystem.hpp"
 #include "Subsystems/ArmSubsystem.hpp"
@@ -22,8 +21,7 @@
 class Robot : public frc::TimedRobot {
     public:
         std::shared_ptr<frc::Command> drive_command;
-        std::shared_ptr<frc::Command> arm_command;
-        std::shared_ptr<frc::Command> intake_command;
+        std::shared_ptr<frc::Command> cube_command;
         std::shared_ptr<frc::Command> auto_command;
         std::shared_ptr<frc::Command> rumble_command;
 

@@ -25,10 +25,8 @@ void Robot::RobotInit() {
     drive_command = std::make_shared<DriveCommand>();
 
     arm_subsystem = std::make_unique<ArmSubsystem>();
-    arm_command = std::make_shared<ArmCommand>();
-
     intake_subsystem = std::make_unique<IntakeSubsystem>();
-    intake_command = std::make_shared<IntakeCommand>();
+    cube_command = std::make_shared<CubeCommand>();
 
     auto_command = std::make_shared<AutoCommand>();
 
@@ -76,10 +74,8 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {
     auto_command->Cancel();
     drive_command->Start();
-    arm_command->Start();
-    intake_command->Start();
-    //rumble_command->Start();
-    std::cout << "Starting solenoids...";
+    cube_command->Start();
+    rumble_command->Start();
 }
 
 void Robot::TeleopPeriodic() {
