@@ -16,7 +16,7 @@ void Robot::RobotInit() {
     //chooser.AddDefault("Default Auto", auto_command);
     //frc::SmartDashboard::PutData("Auto Modes", &chooser);
     RobotMap::init();
-    RobotMap::compressor->Stop();
+    //RobotMap::compressor->Stop();
 
     oi = std::make_unique<OI>();
     oi->SetLiveWindow();

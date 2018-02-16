@@ -14,16 +14,19 @@ std::shared_ptr<frc::VictorSP> RobotMap::right_climber;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::arm_solenoid;
 std::shared_ptr<ctre::CANTalonSRX> RobotMap::left_internal_intake;
 std::shared_ptr<ctre::CANTalonSRX> RobotMap::right_internal_intake;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::intake_solenoid;
 std::shared_ptr<frc::Spark> RobotMap::left_external_intake;
 std::shared_ptr<frc::Spark> RobotMap::right_external_intake;
 std::shared_ptr<frc::PowerDistributionPanel> RobotMap::pdp;
 std::shared_ptr<frc::Compressor> RobotMap::compressor;
+constexpr int RobotMap::pcm_num;
+constexpr int RobotMap::pdp_num;
 
 void RobotMap::init() {
     std::cout << "Starting RobotMap::init() ..." << std::endl;
 
-    left_drive = std::make_shared<frc::Spark>(0);
-    right_drive = std::make_shared<frc::Spark>(1);
+    left_drive = std::make_shared<frc::Spark>(1);
+    right_drive = std::make_shared<frc::Spark>(0);
 
     // 6" diameter wheels, 1440 pulse/rev encoders
     left_drive_enc = std::make_shared<frc::Encoder>(0, 1, true);
@@ -64,16 +67,18 @@ void RobotMap::init() {
     left_climber = std::make_shared<frc::VictorSP>(3);
     right_climber = std::make_shared<frc::VictorSP>(4);
 
-    arm_solenoid = std::make_shared<frc::DoubleSolenoid>(2, 0, 1);
+    arm_solenoid = std::make_shared<frc::DoubleSolenoid>(pcm_num, 6, 7);
 
     left_internal_intake = std::make_shared<ctre::CANTalonSRX>(0);
     right_internal_intake = std::make_shared<ctre::CANTalonSRX>(1);
 
+    intake_solenoid = std::make_shared<frc::DoubleSolenoid>(pcm_num, 0, 1);
+
     left_external_intake = std::make_shared<frc::Spark>(2);
     right_external_intake = std::make_shared<frc::Spark>(5);
 
-    pdp = std::make_shared<frc::PowerDistributionPanel>(3);
-    compressor = std::make_shared<frc::Compressor>(2);
+    pdp = std::make_shared<frc::PowerDistributionPanel>(pdp_num);
+    compressor = std::make_shared<frc::Compressor>(pcm_num);
 
     std::cout << "RobotMap::init() ended." << std::endl;
 }

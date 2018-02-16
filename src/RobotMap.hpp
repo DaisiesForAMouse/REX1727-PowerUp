@@ -50,10 +50,12 @@ class RobotMap {
         static std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;
         static std::shared_ptr<ctre::CANTalonSRX> right_internal_intake;
         static std::shared_ptr<frc::Spark> left_external_intake;
+        static std::shared_ptr<frc::DoubleSolenoid> intake_solenoid;
         static std::shared_ptr<frc::Spark> right_external_intake;
         static std::shared_ptr<frc::PowerDistributionPanel> pdp;
         static std::shared_ptr<frc::Compressor> compressor;
-
+        static constexpr int pcm_num = 2;
+        static constexpr int pdp_num = 3;
         static void init();
 };
 
