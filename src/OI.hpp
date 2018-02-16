@@ -9,9 +9,9 @@
 #define OI_HPP
 
 #include <iostream>
-#include <functional>
 
 #include <XboxController.h>
+#include <Joystick.h>
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/Sendable.h>
 
@@ -22,10 +22,11 @@ class OI {
         OI();
         ~OI();
         std::shared_ptr<frc::XboxController> GetXboxController();
+        std::shared_ptr<frc::Joystick> GetLogitech();
         void SetLiveWindow();
     private:
-        static void DestroyWindow(frc::LiveWindow*);
         std::shared_ptr<frc::XboxController> xbox_controller;
+        std::shared_ptr<frc::Joystick> logitech_joy;
 };
 
 #endif

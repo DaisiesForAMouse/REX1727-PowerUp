@@ -10,6 +10,7 @@
 OI::OI() {
     std::cout << "OI constructor called..." << std::endl;
     xbox_controller = std::make_shared<frc::XboxController>(0);
+    logitech_joy = std::make_shared<frc::Joystick>(1);
     std::cout << "OI constructor finished." << std::endl;
 }
 
@@ -18,6 +19,10 @@ OI::~OI() {
 
 std::shared_ptr<frc::XboxController> OI::GetXboxController() {
     return xbox_controller;
+}
+
+std::shared_ptr<frc::Joystick> OI::GetLogitech() {
+    return logitech_joy;
 }
 
 void OI::SetLiveWindow() {
