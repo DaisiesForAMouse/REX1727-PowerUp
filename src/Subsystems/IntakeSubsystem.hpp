@@ -16,11 +16,11 @@ class IntakeSubsystem : public frc::Subsystem {
         IntakeSubsystem();
         void InitDefaultCommand() override;
         void Periodic() override;
-        void Deploy();
         void Toggle();
         void SetPosition(PostionAction);
         void SetIntake(IntakeAction);
         void SetIntake(double);
+        bool GetOpened();
     private:
         std::shared_ptr<frc::Spark> left_external_intake;
         std::shared_ptr<frc::Spark> right_external_intake;

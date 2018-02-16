@@ -39,14 +39,14 @@ void IntakeSubsystem::SetPosition(PostionAction p) {
         case deploy:
             if (!opened) {
                 intake_solenoid->Set(frc::DoubleSolenoid::kForward);
+                opened = true;
             }
-            opened = true;
             break;
         case grip:
             if (opened) {
                 intake_solenoid->Set(frc::DoubleSolenoid::kReverse);
+                opened = false;
             }
-            opened = false;
             break;
     }
 }
@@ -56,12 +56,12 @@ void IntakeSubsystem::SetIntake(double pow) {
     right_external_intake->Set(-pow);
 }
 
-void IntakeSubsystem::Deploy() {
-
-}
-
 void IntakeSubsystem::InitDefaultCommand() {
 }
 
 void IntakeSubsystem::Periodic() {
+}
+
+bool IntakeSubsystem::GetOpened() {
+    return opened;
 }
