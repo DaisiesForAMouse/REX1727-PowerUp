@@ -14,10 +14,20 @@ void DriveCommand::Initialize() {
 }
 
 void DriveCommand::Execute() {
-    auto joy = Robot::oi->GetXboxController();
-    Robot::drive_subsystem->SetDriveRaw(
-            joy->GetY(frc::GenericHID::kLeftHand),
-            joy->GetY(frc::GenericHID::kRightHand));
+    auto xbox = Robot::oi->GetXboxController();
+
+    constexpr auto right = frc::GenericHID::kRightHand;
+    constexpr auto left = frc::GenericHID::kLeftHand;
+
+    if (xbox->GetTriggerAxis(right) >= 0.25) {
+        Robot::drive_subsystem->SetDriveRaw(
+                xbox->GetY(left) * 0.4,
+                xbox->GetY(right) * 0.4);
+    } else {
+        Robot::drive_subsystem->SetDriveRaw(
+                xbox->GetY(left),
+                xbox->GetY(right));
+    }
 }
 
 bool DriveCommand::IsFinished() {

@@ -1,9 +1,13 @@
 #include "RumbleCommand.hpp"
 
 RumbleCommand::RumbleCommand() {
+    currents.resize(10);
+    currents.shrink_to_fit();
+    for (auto& d : currents)
+        d = 0;
 }
 
-void RumbleCommand::Initialize() {};
+void RumbleCommand::Initialize() {}
 
 void RumbleCommand::Execute() {
     auto joy = Robot::oi->GetXboxController();
@@ -12,9 +16,8 @@ void RumbleCommand::Execute() {
     double avg = 0;
     currents.pop_front();
     currents.push_back(curr);
-    for (auto& d : currents) {
+    for (const auto& d : currents)
         avg += d;
-    }
     avg /= 10;
     joy->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, std::abs((curr - avg) / 75));
     joy->SetRumble(frc::GenericHID::RumbleType::kRightRumble, std::abs((curr - avg) / 75));
@@ -22,8 +25,8 @@ void RumbleCommand::Execute() {
 
 bool RumbleCommand::IsFinished() {
     return false;
-};
+}
 
-void RumbleCommand::End() {};
+void RumbleCommand::End() {}
 
-void RumbleCommand::Interrupted() {};
+void RumbleCommand::Interrupted() {}
