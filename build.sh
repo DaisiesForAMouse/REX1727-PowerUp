@@ -6,13 +6,15 @@ echo "build.sh: Starting build process..."
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $dir
 rm "FRCUserProgram"
-mkdir build
+if [ ! -d "build" ]; then
+    mkdir build
+fi
 cd build
 
 echo "build.sh: Generating Makefiles..."
 frcmake ..
 
-target="FRCDebug"
+target="debug"
 
 echo "$#"
 

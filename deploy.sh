@@ -20,7 +20,7 @@ fi
 echo "First trying to connect on mDNS..."
 ping -c 1 -W 1.5 "roboRIO-$team-FRC.local" > /dev/null 2>&1 ; mDNS=$?
 if [ $mDNS -ne 0 ]; then
-    echo "roboRIO not found on mDNS at roboRIO-$team-FRC.local, falling back to static USB"
+    echo "roboRIO not found on mDNS at roboRIO-$team-FRC.local, falling back to static USB..."
     ping -c 1 -W 1.5 "172.22.11.2" > /dev/null 2>&1 ; static=$?
     if [ $static -ne 0 ] ; then
         echo "Failed to connect via static USB, falling back to static ethernet..."
