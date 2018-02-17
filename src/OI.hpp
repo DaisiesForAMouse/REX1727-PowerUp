@@ -9,11 +9,15 @@
 #define OI_HPP
 
 #include <iostream>
+#include <thread>
 
 #include <XboxController.h>
 #include <Joystick.h>
-#include <LiveWindow/LiveWindow.h>
+#include <SmartDashboard/SmartDashboard.h>
 #include <SmartDashboard/Sendable.h>
+#include <CameraServer.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 #include "RobotMap.hpp"
 
@@ -23,10 +27,12 @@ class OI {
         ~OI();
         std::shared_ptr<frc::XboxController> GetXboxController();
         std::shared_ptr<frc::Joystick> GetLogitech();
-        void SetLiveWindow();
+        void SetDashboard();
+        void StartCameras();
     private:
         std::shared_ptr<frc::XboxController> xbox_controller;
         std::shared_ptr<frc::Joystick> logitech_joy;
+        static void LifeCamThread();
 };
 
 #endif
