@@ -1,11 +1,19 @@
 #include "DriveSubsystem.hpp"
 
 DriveSubsystem::DriveSubsystem() : frc::Subsystem("DriveSubsystem") {
-    std::cout << "DriveSubsystem constructor called ...";
+    std::cout << "DriveSubsystem constructor called ..." << std::endl;
     left_drive = RobotMap::left_drive;
     right_drive = RobotMap::right_drive;
     tank_drive = RobotMap::tank_drive;
-    std::cout << "DriveSubsystem constructor ended.";
+    left_drive_vel_PID = RobotMap::left_drive_vel_PID;
+    left_drive_vel_PID->Disable();
+    right_drive_vel_PID = RobotMap::right_drive_vel_PID;
+    right_drive_vel_PID->Disable();
+    left_drive_dist_PID = RobotMap::left_drive_dist_PID;
+    left_drive_dist_PID->Disable();
+    right_drive_dist_PID = RobotMap::right_drive_dist_PID;
+    right_drive_dist_PID->Disable();
+    std::cout << "DriveSubsystem constructor ended." << std::endl;
 }
 
 void DriveSubsystem::SetDriveRaw(double left, double right, bool squared) {

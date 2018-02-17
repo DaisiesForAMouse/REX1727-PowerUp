@@ -1,21 +1,20 @@
 #include "ArmSubsystem.hpp"
 
 ArmSubsystem::ArmSubsystem() : frc::Subsystem("ArmSubsystem") {
-    std::cout << "ArmSubsystem constructor called ...";
+    std::cout << "ArmSubsystem constructor called ..." << std::endl;
     arm_solenoid = RobotMap::arm_solenoid;
     arm_solenoid->ClearAllPCMStickyFaults();
     left_internal_intake = RobotMap::left_internal_intake;
     right_internal_intake = RobotMap::right_internal_intake;
     raised = false;
-    std::cout << "ArmSubsystem constructor ended.";
+    std::cout << "ArmSubsystem constructor ended." << std::endl;
 }
 
 void ArmSubsystem::Toggle() {
-    if (raised) {
+    if (raised)
         SetArm(drop);
-    } else {
+    else
         SetArm(lift);
-    }
 }
 
 void ArmSubsystem::SetArm(ArmAction a) {
@@ -36,15 +35,16 @@ void ArmSubsystem::SetArm(ArmAction a) {
 }
 
 void ArmSubsystem::SetIntake(IntakeAction i) {
+    constexpr double pow = 1.0;
     auto mode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
     switch (i) {
         case intake:
-            left_internal_intake->Set(mode, 1.0);
-            right_internal_intake->Set(mode, -1.0);
+            left_internal_intake->Set(mode, pow);
+            right_internal_intake->Set(mode, -pow);
             break;
         case outtake:
-            left_internal_intake->Set(mode, -1.0);
-            right_internal_intake->Set(mode, 1.0);
+            left_internal_intake->Set(mode, -pow);
+            right_internal_intake->Set(mode, pow);
             break;
         case off:
             left_internal_intake->Set(mode, 0);

@@ -1,12 +1,12 @@
 #include "IntakeSubsystem.hpp"
 
 IntakeSubsystem::IntakeSubsystem() : frc::Subsystem("IntakeSubsystem") {
-    std::cout << "IntakeSubsystem constructor called ...";
+    std::cout << "IntakeSubsystem constructor called ..." << std::endl;
     left_external_intake = RobotMap::left_external_intake;
     right_external_intake = RobotMap::right_external_intake;
     intake_solenoid = RobotMap::intake_solenoid;
     opened = false;
-    std::cout << "IntakeSubsystem constructor ended.";
+    std::cout << "IntakeSubsystem constructor ended." << std::endl;
 }
 
 void IntakeSubsystem::Toggle() {
@@ -18,14 +18,15 @@ void IntakeSubsystem::Toggle() {
 }
 
 void IntakeSubsystem::SetIntake(IntakeAction i) {
+    constexpr double pow = 0.75;
     switch (i) {
         case intake:
-            left_external_intake->Set(1.0);
-            right_external_intake->Set(-1.0);
+            left_external_intake->Set(pow);
+            right_external_intake->Set(-pow);
             break;
         case outtake:
-            left_external_intake->Set(-1.0);
-            right_external_intake->Set(1.0);
+            left_external_intake->Set(-pow);
+            right_external_intake->Set(pow);
             break;
         case off:
             left_external_intake->StopMotor();

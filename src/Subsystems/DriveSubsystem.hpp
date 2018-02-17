@@ -18,6 +18,10 @@ class DriveSubsystem: public frc::Subsystem {
         std::shared_ptr<frc::Spark> left_drive;
         std::shared_ptr<frc::Spark> right_drive;
         std::shared_ptr<frc::DifferentialDrive> tank_drive;
+        std::shared_ptr<frc::PIDController> left_drive_vel_PID;
+        std::shared_ptr<frc::PIDController> right_drive_vel_PID;
+        std::shared_ptr<frc::PIDController> left_drive_dist_PID;
+        std::shared_ptr<frc::PIDController> right_drive_dist_PID;
 };
 
 #endif
