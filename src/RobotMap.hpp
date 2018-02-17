@@ -21,6 +21,7 @@
 #include <PowerDistributionPanel.h>
 #include <Compressor.h>
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
+#include <cscore_oo.h>
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -48,14 +49,16 @@ class RobotMap {
         static std::shared_ptr<frc::VictorSP> right_climber;
         static std::shared_ptr<frc::DoubleSolenoid> arm_solenoid;
         static std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;
+        static constexpr int left_talon = 0;
         static std::shared_ptr<ctre::CANTalonSRX> right_internal_intake;
+        static constexpr int right_talon = 1;
         static std::shared_ptr<frc::Spark> left_external_intake;
         static std::shared_ptr<frc::DoubleSolenoid> intake_solenoid;
         static std::shared_ptr<frc::Spark> right_external_intake;
         static std::shared_ptr<frc::PowerDistributionPanel> pdp;
+        static constexpr int pdp_num = 3;
         static std::shared_ptr<frc::Compressor> compressor;
         static constexpr int pcm_num = 2;
-        static constexpr int pdp_num = 3;
         static void init();
 };
 

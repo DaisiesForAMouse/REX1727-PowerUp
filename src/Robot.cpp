@@ -19,7 +19,8 @@ void Robot::RobotInit() {
     //RobotMap::compressor->Stop();
 
     oi = std::make_unique<OI>();
-    oi->SetLiveWindow();
+    oi->SetDashboard();
+    oi->StartCameras();
 
     drive_subsystem = std::make_unique<DriveSubsystem>();
     drive_command = std::make_shared<DriveCommand>();
@@ -64,6 +65,7 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
     //std::string autoSelected = frc::SmartDashboard::GetString(
               //"Auto Selector", "Default");
+    RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
     auto_command->Start();
 }
 
