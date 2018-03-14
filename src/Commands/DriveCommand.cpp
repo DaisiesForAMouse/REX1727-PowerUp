@@ -5,11 +5,6 @@ DriveCommand::DriveCommand() : frc::Command() {
 }
 
 void DriveCommand::Initialize() {
-    currents.resize(10);
-    currents.shrink_to_fit();
-    for (auto it = currents.begin(); it != currents.end(); ++it) {
-        *it = 0;
-    }
     std::cout << "DriveCommand initialized.";
 }
 
@@ -22,11 +17,13 @@ void DriveCommand::Execute() {
     if (xbox->GetTriggerAxis(right) >= 0.25) {
         Robot::drive_subsystem->SetDriveRaw(
                 xbox->GetY(left) * 0.4,
-                xbox->GetY(right) * 0.4);
+                xbox->GetY(right) * 0.4,
+                false);
     } else {
         Robot::drive_subsystem->SetDriveRaw(
                 xbox->GetY(left),
-                xbox->GetY(right));
+                xbox->GetY(right),
+                true);
     }
 }
 

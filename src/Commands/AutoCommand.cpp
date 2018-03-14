@@ -16,10 +16,40 @@ AutoCommand::AutoCommand() {
 }
 
 // Called just before this Command runs the first time
-void AutoCommand::Initialize() {}
+void AutoCommand::Initialize() {
+    constexpr double kldP = 1.0;
+    constexpr double kldI = 0.0;
+    constexpr double kldD = 0.0;
+    constexpr double krdP = 1.0;
+    constexpr double krdI = 0.0;
+    constexpr double krdD = 0.0;
+
+    RobotMap::left_drive_dist_PID->SetP(kldP);
+    RobotMap::left_drive_dist_PID->SetI(kldI);
+    RobotMap::left_drive_dist_PID->SetD(kldD);
+    RobotMap::right_drive_dist_PID->SetP(krdP);
+    RobotMap::right_drive_dist_PID->SetI(krdI);
+    RobotMap::right_drive_dist_PID->SetD(krdD);
+
+    constexpr double klrP = 1.0;
+    constexpr double klrI = 0.0;
+    constexpr double klrD = 0.0;
+    constexpr double krrP = 1.0;
+    constexpr double krrI = 0.0;
+    constexpr double krrD = 0.0;
+
+    RobotMap::left_drive_dist_PID->SetP(klrP);
+    RobotMap::left_drive_dist_PID->SetI(klrI);
+    RobotMap::left_drive_dist_PID->SetD(klrD);
+    RobotMap::right_drive_dist_PID->SetP(krrP);
+    RobotMap::right_drive_dist_PID->SetI(krrI);
+    RobotMap::right_drive_dist_PID->SetD(krrD);
+}
 
 // Called repeatedly when this Command is scheduled to run
-void AutoCommand::Execute() {}
+void AutoCommand::Execute() {
+    //RobotMap::left_drive_dist_PID->Enable();
+}
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutoCommand::IsFinished() {

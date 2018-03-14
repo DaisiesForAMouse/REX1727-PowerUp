@@ -65,6 +65,6 @@ void ArmSubsystem::InitDefaultCommand() {
 void ArmSubsystem::Periodic() {
 }
 
-bool ArmSubsystem::GetRaised() {
+bool ArmSubsystem::GetRaised() const {
     return raised;
 }

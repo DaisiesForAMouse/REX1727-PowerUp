@@ -2,6 +2,7 @@
 #define CUBE_COMMAND_HPP
 
 #include <Commands/Command.h>
+#include <thread>
 
 #include "../Robot.hpp"
 #include "../Subsystems/ArmSubsystem.hpp"
@@ -19,6 +20,8 @@ class CubeCommand : public frc::Command {
         void End() override;
         void Interrupted() override;
     private:
+        static void DelayToggle(double);
+        static void DelayLauncher();
         void SetArm(ArmAction);
         void ToggleArm();
 };

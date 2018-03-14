@@ -17,11 +17,11 @@ OI::OI() {
 OI::~OI() {
 }
 
-std::shared_ptr<frc::XboxController> OI::GetXboxController() {
+std::shared_ptr<frc::XboxController> OI::GetXboxController() const {
     return xbox_controller;
 }
 
-std::shared_ptr<frc::Joystick> OI::GetLogitech() {
+std::shared_ptr<frc::Joystick> OI::GetLogitech() const {
     return logitech_joy;
 }
 
@@ -36,6 +36,14 @@ void OI::SetDashboard() {
             "Right Drive Encoder", RobotMap::right_drive_enc.get());
     frc::SmartDashboard::PutData(
             "Power Distribution Board", RobotMap::pdp.get());
+    frc::SmartDashboard::PutNumber(
+            "Left Encoder Rate", RobotMap::left_drive_enc->GetRate());
+    frc::SmartDashboard::PutNumber(
+            "Right Encoder Rate", RobotMap::right_drive_enc->GetRate());
+    frc::SmartDashboard::PutNumber(
+            "Left Encoder Distance", RobotMap::left_drive_enc->Get());
+    frc::SmartDashboard::PutNumber(
+            "Right Encoder Distance", RobotMap::right_drive_enc->Get());
 }
 
 void OI::LifeCamThread() {

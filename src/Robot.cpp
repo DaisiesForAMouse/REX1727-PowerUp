@@ -45,7 +45,6 @@ void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {
     frc::Scheduler::GetInstance()->Run();
-    RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
 }
 
 /**
@@ -65,7 +64,9 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
     //std::string autoSelected = frc::SmartDashboard::GetString(
               //"Auto Selector", "Default");
-    RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
+    RobotMap::ResetEncoders();
+    if (RobotMap::arm_solenoid->Get() != frc::DoubleSolenoid::kForward)
+        RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
     auto_command->Start();
 }
 
@@ -74,6 +75,9 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
+    RobotMap::ResetEncoders();
+    if (RobotMap::arm_solenoid->Get() != frc::DoubleSolenoid::kForward)
+        RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
     auto_command->Cancel();
     drive_command->Start();
     cube_command->Start();
@@ -82,6 +86,9 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
     frc::Scheduler::GetInstance()->Run();
+    std::cout << RobotMap::left_drive_enc->Get() << '\t'
+              << RobotMap::right_drive_enc->Get() << std::endl;
+    oi->SetDashboard();
 }
 
 void Robot::TestPeriodic() {}

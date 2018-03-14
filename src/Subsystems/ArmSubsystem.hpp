@@ -19,7 +19,7 @@ class ArmSubsystem : public frc::Subsystem {
         void SetArm(ArmAction);
         void SetIntake(IntakeAction);
         void SetIntake(double);
-        bool GetRaised();
+        bool GetRaised() const;
     private:
         std::shared_ptr<frc::DoubleSolenoid> arm_solenoid;
         std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;

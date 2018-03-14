@@ -60,6 +60,7 @@ class RobotMap {
         static std::shared_ptr<frc::Compressor> compressor;
         static constexpr int pcm_num = 2;
         static void init();
+        static void ResetEncoders();
 };
 
 #endif

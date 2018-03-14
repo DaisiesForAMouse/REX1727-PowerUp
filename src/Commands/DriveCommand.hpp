@@ -13,8 +13,6 @@ class DriveCommand: public frc::Command {
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
-    private:
-        std::deque<double> currents;
 };
 
 #endif

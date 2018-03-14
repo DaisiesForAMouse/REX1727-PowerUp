@@ -63,6 +63,6 @@ void IntakeSubsystem::InitDefaultCommand() {
 void IntakeSubsystem::Periodic() {
 }
 
-bool IntakeSubsystem::GetOpened() {
+bool IntakeSubsystem::GetOpened() const {
     return opened;
 }

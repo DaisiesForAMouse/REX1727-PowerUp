@@ -20,7 +20,7 @@ class IntakeSubsystem : public frc::Subsystem {
         void SetPosition(PostionAction);
         void SetIntake(IntakeAction);
         void SetIntake(double);
-        bool GetOpened();
+        bool GetOpened() const;
     private:
         std::shared_ptr<frc::Spark> left_external_intake;
         std::shared_ptr<frc::Spark> right_external_intake;

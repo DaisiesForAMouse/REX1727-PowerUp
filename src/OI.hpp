@@ -25,8 +25,8 @@ class OI {
     public:
         OI();
         ~OI();
-        std::shared_ptr<frc::XboxController> GetXboxController();
-        std::shared_ptr<frc::Joystick> GetLogitech();
+        std::shared_ptr<frc::XboxController> GetXboxController() const;
+        std::shared_ptr<frc::Joystick> GetLogitech() const;
         void SetDashboard();
         void StartCameras();
     private:

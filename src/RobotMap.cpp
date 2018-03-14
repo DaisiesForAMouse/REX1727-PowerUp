@@ -28,15 +28,17 @@ void RobotMap::init() {
     std::cout << "Starting RobotMap::init() ..." << std::endl;
 
     left_drive = std::make_shared<frc::Spark>(1);
-    left_drive->SetInverted(true);
+    //left_drive->SetInverted(true);
     right_drive = std::make_shared<frc::Spark>(0);
-    right_drive->SetInverted(true);
+    //right_drive->SetInverted(true);
 
-    // 6" diameter wheels, 1440 pulse/rev encoders
-    left_drive_enc = std::make_shared<frc::Encoder>(0, 1, true);
+    // 6" diameter heels, 1440 pulse/rev encoders
+    left_drive_enc = std::make_shared<frc::Encoder>(0, 1, true, frc::Encoder::k4X);
     left_drive_enc->SetDistancePerPulse(6 * M_PI / 1440);
-    right_drive_enc = std::make_shared<frc::Encoder>(2, 3, false);
+    left_drive_enc->Reset();
+    right_drive_enc = std::make_shared<frc::Encoder>(2, 3, false, frc::Encoder::k4X);
     right_drive_enc->SetDistancePerPulse(6 * M_PI / 1440);
+    right_drive_enc->Reset();
 
     tank_drive = std::make_shared<frc::DifferentialDrive>(
             *left_drive, *right_drive);
@@ -85,4 +87,10 @@ void RobotMap::init() {
     compressor = std::make_shared<frc::Compressor>(pcm_num);
 
     std::cout << "RobotMap::init() ended." << std::endl;
+}
+
+void RobotMap::ResetEncoders() {
+    left_drive_enc->Reset();
+    right_drive_enc->Reset();
+
 }

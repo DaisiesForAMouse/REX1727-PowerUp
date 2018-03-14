@@ -22,6 +22,8 @@ class DriveSubsystem: public frc::Subsystem {
         std::shared_ptr<frc::PIDController> right_drive_vel_PID;
         std::shared_ptr<frc::PIDController> left_drive_dist_PID;
         std::shared_ptr<frc::PIDController> right_drive_dist_PID;
+        std::shared_ptr<frc::Encoder> left_drive_enc;
+        std::shared_ptr<frc::Encoder> right_drive_enc;
 };
 
 #endif

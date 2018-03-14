@@ -13,11 +13,13 @@ DriveSubsystem::DriveSubsystem() : frc::Subsystem("DriveSubsystem") {
     left_drive_dist_PID->Disable();
     right_drive_dist_PID = RobotMap::right_drive_dist_PID;
     right_drive_dist_PID->Disable();
+    left_drive_enc = RobotMap::left_drive_enc;
+    right_drive_enc = RobotMap::right_drive_enc;
     std::cout << "DriveSubsystem constructor ended." << std::endl;
 }
 
 void DriveSubsystem::SetDriveRaw(double left, double right, bool squared) {
-    tank_drive->TankDrive(left, right, squared);
+    tank_drive->TankDrive(-left, -right, squared);
 }
 
 void DriveSubsystem::InitDefaultCommand() {

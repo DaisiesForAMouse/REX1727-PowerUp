@@ -56,18 +56,17 @@ void CubeCommand::Interrupted() {
 
 void CubeCommand::SetArm(ArmAction a) {
     switch (a) {
-        case lift:
-            //Robot::intake_subsystem->SetIntake(IntakeSubsystem::off);
-            Robot::intake_subsystem->SetPosition(IntakeSubsystem::grip);
+        case lift: {
             Robot::arm_subsystem->SetArm(ArmSubsystem::lift);
+            std::thread t(DelayToggle, 1.25);
+            t.detach();
             break;
-        case drop:
-            //Robot::intake_subsystem->SetIntake(IntakeSubsystem::off);
-            Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
+        } case drop: {
             Robot::arm_subsystem->SetArm(ArmSubsystem::drop);
+            Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
             break;
+        }
     }
-
 }
 
 void CubeCommand::ToggleArm() {
@@ -75,4 +74,15 @@ void CubeCommand::ToggleArm() {
         SetArm(drop);
     else
         SetArm(lift);
+}
+
+void CubeCommand::DelayToggle(double s) {
+    frc::Timer t;
+    t.Start();
+    auto starting = Robot::intake_subsystem->GetOpened();
+    while (t.Get() < s) {
+        if (starting != Robot::intake_subsystem->GetOpened())
+            return;
+    }
+    Robot::intake_subsystem->SetPosition(IntakeSubsystem::grip);
 }
