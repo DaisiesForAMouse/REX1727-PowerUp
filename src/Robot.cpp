@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #include "Robot.hpp"
 
 std::unique_ptr<OI> Robot::oi;
@@ -15,10 +8,10 @@ std::unique_ptr<ClimberSubsystem> Robot::climber_subsystem;
 
 void Robot::RobotInit() {
     std::cout << "Start of Robot::Init()..." << std::endl;
-    /* chooser.AddDefault("Left", 'l'); */
-    /* chooser.AddObject("Middle", 'm'); */
-    /* chooser.AddObject("Right", 'r'); */
-    /* frc::SmartDashboard::PutData("Starting position", &chooser); */
+    chooser.AddDefault("Left", 'L');
+    chooser.AddObject("Middle", 'M');
+    chooser.AddObject("Right", 'R');
+    frc::SmartDashboard::PutData("Starting position", &chooser);
 
     RobotMap::init();
 
@@ -34,53 +27,32 @@ void Robot::RobotInit() {
     cube_command = std::make_shared<CubeCommand>();
 
     climber_subsystem = std::make_unique<ClimberSubsystem>();
-    /* climber_command = std::make_shared<ClimberCommand>(); */
+    climber_command = std::make_shared<ClimberCommand>();
 
     rumble_command = std::make_shared<RumbleCommand>();
 }
 
-/**
- * This function is called once each time the robot enters Disabled
- * mode.
- * You can use it to reset any subsystem information you want to clear
- * when
- * the robot is disabled.
- */
 void Robot::DisabledInit() {
+    arm_subsystem->SetArm(ArmSubsystem::lift);
+    intake_subsystem->SetPosition(IntakeSubsystem::grip);
 }
 
 void Robot::DisabledPeriodic() {
     frc::Scheduler::GetInstance()->Run();
 }
 
-/**
- * This autonomous (along with the chooser code above) shows how to
- * select
- * between different autonomous modes using the dashboard. The sendable
- * chooser code works with the Java SmartDashboard. If you prefer the
- * LabVIEW Dashboard, remove all of the chooser code and uncomment the
- * GetString code to get the auto name from the text box below the Gyro.
- *
- * You can add additional auto modes by adding additional commands to
- * the
- * chooser code above (like the commented example) or additional
- * comparisons
- * to the if-else structure frbelow with additional strings & commands.
- */
 void Robot::AutonomousInit() {
-    /* char position = chooser.GetSelected(); */
-    /* std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage(); */
+    char position = chooser.GetSelected();
 
-    /* std::transform(game_data.begin(), game_data.end(), game_data.begin(), ::tolower); */
+    std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 
-    /* auto_command_grp = std::make_shared<AutoCommandGroup>( */
-            /* std::move(game_data), std::move(position)); */
+    if (game_data.empty())
+        game_data = "???";
+
     auto_command_grp = std::make_shared<AutoCommandGroup>(
-            "lll", 'l');
+            std::move(game_data), std::move(position));
 
     auto_command_grp->Start();
-
-    RobotMap::ResetEncoders();
 }
 
 void Robot::AutonomousPeriodic() {
@@ -89,18 +61,14 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    if (auto_command_grp->IsRunning() && !auto_command_grp)
-        auto_command_grp->Cancel();
     drive_command->Start();
     cube_command->Start();
     rumble_command->Start();
-    /* climber_command->Start(); */
+    climber_command->Start();
 }
 
 void Robot::TeleopPeriodic() {
     frc::Scheduler::GetInstance()->Run();
-    /* std::cout << RobotMap::left_drive_enc->Get() << '\t' */
-    /*           << RobotMap::right_drive_enc->Get() << std::endl; */
     oi->SetDashboard();
 }
 

@@ -31,6 +31,7 @@ constexpr int RobotMap::pcm_num;
 
 void RobotMap::init() {
     std::cout << "Starting RobotMap::init() ..." << std::endl;
+    constexpr double pi = 3.14159265358979323846;
 
     left_drive = std::make_shared<frc::Spark>(1);
     //left_drive->SetInverted(true);
@@ -38,11 +39,11 @@ void RobotMap::init() {
     //right_drive->SetInverted(true);
 
     // 6" diameter heels, 1440 pulse/rev encoders
-    left_drive_enc = std::make_shared<frc::Encoder>(0, 1, true, frc::Encoder::k4X);
-    left_drive_enc->SetDistancePerPulse(6 * M_PI / 1440);
+    left_drive_enc = std::make_shared<frc::Encoder>(2, 3, true, frc::Encoder::k4X);
+    left_drive_enc->SetDistancePerPulse(6 * pi / 360);
     left_drive_enc->Reset();
-    right_drive_enc = std::make_shared<frc::Encoder>(2, 3, false, frc::Encoder::k4X);
-    right_drive_enc->SetDistancePerPulse(6 * M_PI / 1440);
+    right_drive_enc = std::make_shared<frc::Encoder>(0, 1, false, frc::Encoder::k4X);
+    right_drive_enc->SetDistancePerPulse(6 * pi / 360);
     right_drive_enc->Reset();
 
     tank_drive = std::make_shared<frc::DifferentialDrive>(
