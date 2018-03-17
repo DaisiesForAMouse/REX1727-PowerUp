@@ -21,7 +21,7 @@ void RumbleCommand::Execute() {
     avg /= 10;
     joy->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, std::abs((curr - avg) / 40));
     joy->SetRumble(frc::GenericHID::RumbleType::kRightRumble, std::abs((curr - avg) / 40));
-};
+}
 
 bool RumbleCommand::IsFinished() {
     return false;

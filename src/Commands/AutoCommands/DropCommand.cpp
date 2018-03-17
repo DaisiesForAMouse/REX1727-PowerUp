@@ -11,7 +11,7 @@ void DropCommand::Initialize() {
 }
 
 void DropCommand::Execute() {
-    if (t.Get() > 5)
+    if (t.Get() > 1)
         Robot::arm_subsystem->SetIntake(ArmSubsystem::outtake);
 }
 

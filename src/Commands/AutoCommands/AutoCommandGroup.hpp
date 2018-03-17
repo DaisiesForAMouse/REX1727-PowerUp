@@ -7,6 +7,7 @@
 #include "DistanceCommand.hpp"
 #include "TurnCommand.hpp"
 #include "DropCommand.hpp"
+#include "DeployCommand.hpp"
 #include "../../Robot.hpp"
 
 class AutoCommandGroup : public frc::CommandGroup {

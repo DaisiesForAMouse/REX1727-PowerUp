@@ -7,20 +7,24 @@ DistanceCommand::DistanceCommand(double d) :
 
     Requires(Robot::drive_subsystem.get());
     dist = d;
-    p = dist < 0 ? -1 : 1;
+    p = dist < 0 ? 0.6 : -0.6;
 }
 
 void DistanceCommand::Initialize() {
 }
 
 void DistanceCommand::Execute() {
-    Robot::drive_subsystem->SetDriveRaw(p, p, false);
+    Robot::drive_subsystem->SetDriveRaw(p*1.18, p, false);
+    std::cout << Robot::drive_subsystem->GetEncDist(DriveSubsystem::left) << '\t'
+              << Robot::drive_subsystem->GetEncDist(DriveSubsystem::right) << std::endl;
 }
 
 bool DistanceCommand::IsFinished() {
-    double left = std::abs(Robot::drive_subsystem->GetEncDist(DriveSubsystem::left)) - start_l;
-    double right = std::abs(Robot::drive_subsystem->GetEncDist(DriveSubsystem::right)) - start_r;
-    return  left > std::abs(dist) && right > std::abs(dist);
+    double left = std::abs(Robot::drive_subsystem->GetEncDist(DriveSubsystem::left) - start_l);
+
+    double right = std::abs(Robot::drive_subsystem->GetEncDist(DriveSubsystem::right) - start_r);
+
+    return left > std::abs(dist) || right > std::abs(dist);
 }
 
 void DistanceCommand::End() {

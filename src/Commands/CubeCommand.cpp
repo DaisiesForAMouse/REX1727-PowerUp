@@ -7,7 +7,6 @@ CubeCommand::CubeCommand() {
 
 void CubeCommand::Initialize() {
     std::cout << "CubeCommand initialized." << std::endl;
-    RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
 }
 
 void CubeCommand::Execute() {
@@ -17,9 +16,9 @@ void CubeCommand::Execute() {
     constexpr auto right = frc::GenericHID::kRightHand;
     constexpr auto left = frc::GenericHID::kLeftHand;
 
-    if (xbox->GetBumperPressed(right))
+    if (xbox->GetBumperPressed(left))
         SetArm(lift);
-    else if (xbox->GetBumperPressed(left))
+    else if (xbox->GetBumperPressed(right))
         SetArm(drop);
 
     if (xbox->GetTriggerAxis(left) > 0.25)
@@ -63,6 +62,7 @@ bool CubeCommand::IsFinished() {
 }
 
 void CubeCommand::End() {
+    SetArm(lift);
 }
 
 void CubeCommand::Interrupted() {
@@ -71,13 +71,14 @@ void CubeCommand::Interrupted() {
 void CubeCommand::SetArm(ArmAction a) {
     switch (a) {
         case lift: {
+            Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
             Robot::arm_subsystem->SetArm(ArmSubsystem::lift);
             std::thread t(DelayToggle, 1.0);
             t.detach();
             break;
         } case drop: {
-            Robot::arm_subsystem->SetArm(ArmSubsystem::drop);
             Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
+            Robot::arm_subsystem->SetArm(ArmSubsystem::drop);
             break;
         }
     }
