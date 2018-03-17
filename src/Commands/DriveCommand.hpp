@@ -1,5 +1,4 @@
-#ifndef DRIVE_COMMAND_HPP
-#define DRIVE_COMMAND_HPP
+#pragma once
 
 #include "Commands/Command.h"
 #include "../Robot.hpp"
@@ -14,5 +13,3 @@ class DriveCommand: public frc::Command {
         void End() override;
         void Interrupted() override;
 };
-
-#endif

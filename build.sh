@@ -5,7 +5,7 @@ echo "build.sh: Starting build process..."
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $dir
-rm "FRCUserProgram"
+rm FRCUserProgram opt debug
 if [ ! -d "build" ]; then
     mkdir build
 fi

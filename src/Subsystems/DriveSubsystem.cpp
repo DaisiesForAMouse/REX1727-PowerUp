@@ -44,6 +44,18 @@ void DriveSubsystem::Turn(double deg) {
     }
 }
 
+double DriveSubsystem::GetEncDist(DriveSide s) {
+    switch (s) {
+        case left: {
+            return left_drive_enc->GetDistance();
+        } case right: {
+            return right_drive_enc->GetDistance();
+        } case both: {
+            return 0;
+        }
+    }
+}
+
 /* void DriveSubsystem::DriveDist(double dist, DriveSide side) { */
 /*     frc::Timer timer; */
 /*     timer.Reset(); */

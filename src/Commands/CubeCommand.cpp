@@ -72,7 +72,7 @@ void CubeCommand::SetArm(ArmAction a) {
     switch (a) {
         case lift: {
             Robot::arm_subsystem->SetArm(ArmSubsystem::lift);
-            std::thread t(DelayToggle, 1.25);
+            std::thread t(DelayToggle, 1.0);
             t.detach();
             break;
         } case drop: {

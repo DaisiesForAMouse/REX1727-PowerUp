@@ -11,7 +11,7 @@ echo "Removing build directory..."
 rm -rf build > /dev/null 2>&1
 
 echo "Removing executables..."
-rm FRCOpt FRCDebug FRCUserProgram > /dev/null 2>&1
+rm opt debug FRCUserProgram > /dev/null 2>&1
 
 cd $cur
 

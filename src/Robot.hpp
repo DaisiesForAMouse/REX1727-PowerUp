@@ -1,15 +1,17 @@
-#ifndef ROBOT_HPP
-#define ROBOT_HPP
+#pragma once
 
 #include <memory>
+#include <algorithm>
 #include <iostream>
+#include <string>
 
 #include <Commands/Command.h>
 #include <Commands/Scheduler.h>
 #include <DriverStation.h>
 #include <TimedRobot.h>
+#include <SmartDashboard/SendableChooser.h>
 
-#include "Commands/AutoCommands/AutoCommand.hpp"
+#include "Commands/AutoCommands/AutoCommandGroup.hpp"
 #include "Commands/DriveCommand.hpp"
 #include "Commands/CubeCommand.hpp"
 #include "Commands/RumbleCommand.hpp"
@@ -23,12 +25,6 @@
 
 class Robot : public frc::TimedRobot {
     public:
-        std::shared_ptr<frc::Command> drive_command;
-        std::shared_ptr<frc::Command> cube_command;
-        std::shared_ptr<frc::Command> auto_command;
-        std::shared_ptr<frc::Command> rumble_command;
-        std::shared_ptr<frc::Command> climber_command;
-
         static std::unique_ptr<OI> oi;
         static std::unique_ptr<DriveSubsystem> drive_subsystem;
         static std::unique_ptr<ArmSubsystem> arm_subsystem;
@@ -43,6 +39,13 @@ class Robot : public frc::TimedRobot {
         void TeleopInit() override;
         void TeleopPeriodic() override;
         void TestPeriodic() override;
-};
 
-#endif
+    private:
+        frc::SendableChooser<char> chooser;
+
+        std::shared_ptr<frc::Command> drive_command;
+        std::shared_ptr<frc::Command> cube_command;
+        std::shared_ptr<frc::Command> rumble_command;
+        std::shared_ptr<frc::Command> climber_command;
+        std::shared_ptr<frc::CommandGroup> auto_command_grp;
+};

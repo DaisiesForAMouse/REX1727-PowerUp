@@ -1,5 +1,4 @@
-#ifndef RUMBLE_COMMAND_HPP
-#define RUMBLE_COMMAND_HPP
+#pragma once
 
 #include <deque>
 #include <cmath>
@@ -20,4 +19,3 @@ class RumbleCommand: public frc::Command {
         std::deque<double> currents;
 };
 
-#endif

@@ -1,6 +1,4 @@
-#ifndef CLIMB_SUBSYSTEM_HPP
-#define CLIMB_SUBSYSTEM_HPP
-
+#pragma once
 
 #include <Commands/Subsystem.h>
 #include <VictorSP.h>
@@ -25,5 +23,3 @@ class ClimberSubsystem: public frc::Subsystem {
         std::shared_ptr<frc::DoubleSolenoid> climber_solenoid;
         std::shared_ptr<frc::DoubleSolenoid> brake_solenoid;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CUBE_COMMAND_HPP
-#define CUBE_COMMAND_HPP
+#pragma once
 
 #include <Commands/Command.h>
 #include <thread>
@@ -24,5 +23,3 @@ class CubeCommand : public frc::Command {
         void SetArm(ArmAction);
         void ToggleArm();
 };
-
-#endif

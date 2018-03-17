@@ -1,5 +1,4 @@
-#ifndef CLIMB_COMMAND_HPP
-#define CLIMB_COMMAND_HPP
+#pragma once
 
 #include "Commands/Command.h"
 #include "../Robot.hpp"
@@ -14,6 +13,3 @@ class ClimberCommand: public frc::Command {
         void End() override;
         void Interrupted() override;
 };
-
-#endif
-

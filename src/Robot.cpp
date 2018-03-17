@@ -14,10 +14,12 @@ std::unique_ptr<IntakeSubsystem> Robot::intake_subsystem;
 std::unique_ptr<ClimberSubsystem> Robot::climber_subsystem;
 
 void Robot::RobotInit() {
-    //chooser.AddDefault("Default Auto", auto_command);
-    //frc::SmartDashboard::PutData("Auto Modes", &chooser);
+    chooser.AddObject("Left", 'l');
+    chooser.AddObject("Middle", 'm');
+    chooser.AddObject("Right", 'r');
+    frc::SmartDashboard::PutData("Starting position", &chooser);
+
     RobotMap::init();
-    //RobotMap::compressor->Stop();
 
     oi = std::make_unique<OI>();
     oi->SetDashboard();
@@ -33,8 +35,6 @@ void Robot::RobotInit() {
     climber_subsystem = std::make_unique<ClimberSubsystem>();
     climber_command = std::make_shared<ClimberCommand>();
 
-    auto_command = std::static_pointer_cast<AutoCommand>(std::make_shared<AutoCommand>());
-
     rumble_command = std::make_shared<RumbleCommand>();
 }
 
@@ -45,7 +45,8 @@ void Robot::RobotInit() {
  * when
  * the robot is disabled.
  */
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+}
 
 void Robot::DisabledPeriodic() {
     frc::Scheduler::GetInstance()->Run();
@@ -66,15 +67,18 @@ void Robot::DisabledPeriodic() {
  * to the if-else structure frbelow with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-    //std::string autoSelected = frc::SmartDashboard::GetString(
-              //"Auto Selector", "Default");
+    char position = chooser.GetSelected();
     std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-    std::static_pointer_cast<AutoCommand>(auto_command)->SetInfo(std::move(game_data));
+
+    std::transform(game_data.begin(), game_data.end(), game_data.begin(), ::tolower);
+
+    auto_command_grp = std::make_shared<AutoCommandGroup>(
+            std::move(game_data), std::move(position));
+
+    if (false)
+        auto_command_grp->Start();
 
     RobotMap::ResetEncoders();
-    if (RobotMap::arm_solenoid->Get() != frc::DoubleSolenoid::kForward)
-        RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
-    auto_command->Start();
 }
 
 void Robot::AutonomousPeriodic() {
@@ -83,7 +87,7 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    auto_command->Cancel();
+    auto_command_grp->Cancel();
     drive_command->Start();
     cube_command->Start();
     rumble_command->Start();

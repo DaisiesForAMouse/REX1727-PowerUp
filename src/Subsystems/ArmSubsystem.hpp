@@ -1,5 +1,4 @@
-#ifndef ARM_SUBSYSTEM_HPP
-#define ARM_SUBSYSTEM_HPP
+#pragma once
 
 #include <Commands/Subsystem.h>
 #include <DoubleSolenoid.h>
@@ -26,5 +25,3 @@ class ArmSubsystem : public frc::Subsystem {
         std::shared_ptr<ctre::CANTalonSRX> right_internal_intake;
         bool raised;
 };
-
-#endif

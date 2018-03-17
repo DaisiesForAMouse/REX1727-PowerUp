@@ -1,5 +1,4 @@
-#ifndef INTAKE_SUBSYSTEM_HPP
-#define INTAKE_SUBSYSTEM_HPP
+#pragma once
 
 #include <iostream>
 
@@ -27,5 +26,3 @@ class IntakeSubsystem : public frc::Subsystem {
         std::shared_ptr<frc::DoubleSolenoid> intake_solenoid;
         bool opened;
 };
-
-#endif

@@ -5,8 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#ifndef OI_HPP
-#define OI_HPP
+#pragma once
 
 #include <iostream>
 #include <thread>
@@ -34,5 +33,3 @@ class OI {
         std::shared_ptr<frc::Joystick> logitech_joy;
         static void LifeCamThread();
 };
-
-#endif

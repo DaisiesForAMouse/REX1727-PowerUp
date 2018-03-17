@@ -1,5 +1,4 @@
-#ifndef DRIVE_SUBSYSTEM_HPP
-#define DRIVE_SUBSYSTEM_HPP
+#pragma once
 
 #include <cmath>
 
@@ -18,6 +17,7 @@ class DriveSubsystem: public frc::Subsystem {
         void SetDriveRaw(double left, double right, bool squared = true);
         void DriveDist(double);
         void Turn(double);
+        double GetEncDist(DriveSide);
     private:
         std::shared_ptr<frc::Spark> left_drive;
         std::shared_ptr<frc::Spark> right_drive;
@@ -29,5 +29,3 @@ class DriveSubsystem: public frc::Subsystem {
         std::shared_ptr<frc::Encoder> left_drive_enc;
         std::shared_ptr<frc::Encoder> right_drive_enc;
 };
-
-#endif

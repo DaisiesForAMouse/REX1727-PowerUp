@@ -5,8 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#ifndef ROBOT_MAP_HPP
-#define ROBOT_MAP_HPP
+#pragma once
 
 #include <memory>
 #include <iostream>
@@ -68,5 +67,3 @@ class RobotMap {
         static void init();
         static void ResetEncoders();
 };
-
-#endif
