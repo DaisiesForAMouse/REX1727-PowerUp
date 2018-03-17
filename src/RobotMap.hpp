@@ -45,8 +45,12 @@ class RobotMap {
         static std::shared_ptr<frc::PIDController> left_drive_dist_PID;
         static std::shared_ptr<frc::PIDController> right_drive_vel_PID;
         static std::shared_ptr<frc::PIDController> right_drive_dist_PID;
+
         static std::shared_ptr<frc::VictorSP> left_climber;
         static std::shared_ptr<frc::VictorSP> right_climber;
+        static std::shared_ptr<frc::DoubleSolenoid> climber_solenoid;
+        static std::shared_ptr<frc::DoubleSolenoid> brake_solenoid;
+
         static std::shared_ptr<frc::DoubleSolenoid> arm_solenoid;
         static std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;
         static constexpr int left_talon = 0;
@@ -55,10 +59,12 @@ class RobotMap {
         static std::shared_ptr<frc::Spark> left_external_intake;
         static std::shared_ptr<frc::DoubleSolenoid> intake_solenoid;
         static std::shared_ptr<frc::Spark> right_external_intake;
+
         static std::shared_ptr<frc::PowerDistributionPanel> pdp;
         static constexpr int pdp_num = 3;
         static std::shared_ptr<frc::Compressor> compressor;
         static constexpr int pcm_num = 2;
+
         static void init();
         static void ResetEncoders();
 };

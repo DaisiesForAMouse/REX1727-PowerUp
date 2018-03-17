@@ -11,6 +11,7 @@ std::unique_ptr<OI> Robot::oi;
 std::unique_ptr<DriveSubsystem> Robot::drive_subsystem;
 std::unique_ptr<ArmSubsystem> Robot::arm_subsystem;
 std::unique_ptr<IntakeSubsystem> Robot::intake_subsystem;
+std::unique_ptr<ClimberSubsystem> Robot::climber_subsystem;
 
 void Robot::RobotInit() {
     //chooser.AddDefault("Default Auto", auto_command);
@@ -29,7 +30,10 @@ void Robot::RobotInit() {
     intake_subsystem = std::make_unique<IntakeSubsystem>();
     cube_command = std::make_shared<CubeCommand>();
 
-    auto_command = std::make_shared<AutoCommand>();
+    climber_subsystem = std::make_unique<ClimberSubsystem>();
+    climber_command = std::make_shared<ClimberCommand>();
+
+    auto_command = std::static_pointer_cast<AutoCommand>(std::make_shared<AutoCommand>());
 
     rumble_command = std::make_shared<RumbleCommand>();
 }
@@ -59,11 +63,14 @@ void Robot::DisabledPeriodic() {
  * the
  * chooser code above (like the commented example) or additional
  * comparisons
- * to the if-else structure below with additional strings & commands.
+ * to the if-else structure frbelow with additional strings & commands.
  */
 void Robot::AutonomousInit() {
     //std::string autoSelected = frc::SmartDashboard::GetString(
               //"Auto Selector", "Default");
+    std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+    std::static_pointer_cast<AutoCommand>(auto_command)->SetInfo(std::move(game_data));
+
     RobotMap::ResetEncoders();
     if (RobotMap::arm_solenoid->Get() != frc::DoubleSolenoid::kForward)
         RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
@@ -76,8 +83,6 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    if (RobotMap::arm_solenoid->Get() != frc::DoubleSolenoid::kForward)
-        RobotMap::arm_solenoid->Set(frc::DoubleSolenoid::kForward);
     auto_command->Cancel();
     drive_command->Start();
     cube_command->Start();
@@ -86,11 +91,12 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
     frc::Scheduler::GetInstance()->Run();
-    std::cout << RobotMap::left_drive_enc->Get() << '\t'
-              << RobotMap::right_drive_enc->Get() << std::endl;
+    /* std::cout << RobotMap::left_drive_enc->Get() << '\t' */
+    /*           << RobotMap::right_drive_enc->Get() << std::endl; */
     oi->SetDashboard();
 }
 
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic() {
+}
 
 START_ROBOT_CLASS(Robot)

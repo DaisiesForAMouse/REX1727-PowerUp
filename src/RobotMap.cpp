@@ -9,8 +9,12 @@ std::shared_ptr<frc::PIDController> RobotMap::left_drive_vel_PID;
 std::shared_ptr<frc::PIDController> RobotMap::left_drive_dist_PID;
 std::shared_ptr<frc::PIDController> RobotMap::right_drive_vel_PID;
 std::shared_ptr<frc::PIDController> RobotMap::right_drive_dist_PID;
+
 std::shared_ptr<frc::VictorSP> RobotMap::left_climber;
 std::shared_ptr<frc::VictorSP> RobotMap::right_climber;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::climber_solenoid;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::brake_solenoid;
+
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::arm_solenoid;
 std::shared_ptr<ctre::CANTalonSRX> RobotMap::left_internal_intake;
 constexpr int RobotMap::left_talon;
@@ -19,6 +23,7 @@ constexpr int RobotMap::right_talon;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::intake_solenoid;
 std::shared_ptr<frc::Spark> RobotMap::left_external_intake;
 std::shared_ptr<frc::Spark> RobotMap::right_external_intake;
+
 std::shared_ptr<frc::PowerDistributionPanel> RobotMap::pdp;
 constexpr int RobotMap::pdp_num;
 std::shared_ptr<frc::Compressor> RobotMap::compressor;
@@ -73,6 +78,11 @@ void RobotMap::init() {
     left_climber = std::make_shared<frc::VictorSP>(3);
     right_climber = std::make_shared<frc::VictorSP>(4);
 
+    // TODO: Add in solenoid ports
+    climber_solenoid = std::make_shared<frc::DoubleSolenoid>(pcm_num, 2, 3);
+    brake_solenoid = std::make_shared<frc::DoubleSolenoid>(pcm_num, 4, 6);
+
+
     arm_solenoid = std::make_shared<frc::DoubleSolenoid>(pcm_num, 5, 7);
 
     left_internal_intake = std::make_shared<ctre::CANTalonSRX>(left_talon);
@@ -92,5 +102,4 @@ void RobotMap::init() {
 void RobotMap::ResetEncoders() {
     left_drive_enc->Reset();
     right_drive_enc->Reset();
-
 }
