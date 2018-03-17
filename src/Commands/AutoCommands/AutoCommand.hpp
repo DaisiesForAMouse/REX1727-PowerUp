@@ -9,16 +9,19 @@
 #define AUTO_COMMAND_HPP
 
 #include <Commands/Command.h>
-#include "../Robot.hpp"
+#include "../../Robot.hpp"
 
 class AutoCommand : public frc::Command {
-public:
-    AutoCommand();
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
+    public:
+        AutoCommand();
+        void Initialize() override;
+        void Execute() override;
+        bool IsFinished() override;
+        void End() override;
+        void Interrupted() override;
+        void SetInfo(std::string&&);
+    private:
+        char switch_side;
 };
 
 #endif
