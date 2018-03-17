@@ -14,15 +14,16 @@ std::unique_ptr<IntakeSubsystem> Robot::intake_subsystem;
 std::unique_ptr<ClimberSubsystem> Robot::climber_subsystem;
 
 void Robot::RobotInit() {
-    chooser.AddObject("Left", 'l');
-    chooser.AddObject("Middle", 'm');
-    chooser.AddObject("Right", 'r');
-    frc::SmartDashboard::PutData("Starting position", &chooser);
+    std::cout << "Start of Robot::Init()..." << std::endl;
+    /* chooser.AddDefault("Left", 'l'); */
+    /* chooser.AddObject("Middle", 'm'); */
+    /* chooser.AddObject("Right", 'r'); */
+    /* frc::SmartDashboard::PutData("Starting position", &chooser); */
 
     RobotMap::init();
 
     oi = std::make_unique<OI>();
-    oi->SetDashboard();
+    /* oi->SetDashboard(); */
     oi->StartCameras();
 
     drive_subsystem = std::make_unique<DriveSubsystem>();
@@ -33,7 +34,7 @@ void Robot::RobotInit() {
     cube_command = std::make_shared<CubeCommand>();
 
     climber_subsystem = std::make_unique<ClimberSubsystem>();
-    climber_command = std::make_shared<ClimberCommand>();
+    /* climber_command = std::make_shared<ClimberCommand>(); */
 
     rumble_command = std::make_shared<RumbleCommand>();
 }
@@ -67,16 +68,17 @@ void Robot::DisabledPeriodic() {
  * to the if-else structure frbelow with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-    char position = chooser.GetSelected();
-    std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+    /* char position = chooser.GetSelected(); */
+    /* std::string game_data = frc::DriverStation::GetInstance().GetGameSpecificMessage(); */
 
-    std::transform(game_data.begin(), game_data.end(), game_data.begin(), ::tolower);
+    /* std::transform(game_data.begin(), game_data.end(), game_data.begin(), ::tolower); */
 
+    /* auto_command_grp = std::make_shared<AutoCommandGroup>( */
+            /* std::move(game_data), std::move(position)); */
     auto_command_grp = std::make_shared<AutoCommandGroup>(
-            std::move(game_data), std::move(position));
+            "lll", 'l');
 
-    if (false)
-        auto_command_grp->Start();
+    auto_command_grp->Start();
 
     RobotMap::ResetEncoders();
 }
@@ -87,10 +89,12 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    auto_command_grp->Cancel();
+    if (auto_command_grp->IsRunning())
+        auto_command_grp->Cancel();
     drive_command->Start();
     cube_command->Start();
     rumble_command->Start();
+    /* climber_command->Start(); */
 }
 
 void Robot::TeleopPeriodic() {
