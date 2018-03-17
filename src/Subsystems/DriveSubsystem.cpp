@@ -54,6 +54,7 @@ double DriveSubsystem::GetEncDist(DriveSide s) {
             return 0;
         }
     }
+    return 0;
 }
 
 /* void DriveSubsystem::DriveDist(double dist, DriveSide side) { */

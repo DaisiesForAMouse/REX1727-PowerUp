@@ -6,7 +6,7 @@ ArmSubsystem::ArmSubsystem() : frc::Subsystem("ArmSubsystem") {
     arm_solenoid->ClearAllPCMStickyFaults();
     left_internal_intake = RobotMap::left_internal_intake;
     right_internal_intake = RobotMap::right_internal_intake;
-    raised = false;
+    raised = arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false;
     std::cout << "ArmSubsystem constructor ended." << std::endl;
 }
 

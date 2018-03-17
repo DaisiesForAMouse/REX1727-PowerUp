@@ -1,10 +1,12 @@
 #include "ClimberSubsystem.hpp"
 
-ClimberSubsystem::ClimberSubsystem() : frc::Subsystem("ClimberSubsystem") {
+ClimberSubsystem::ClimberSubsystem() : frc::Subsystem("Climber Subsystem") {
+    std::cout << "ClimberSubsystem constructor called ..." << std::endl;
     left_climber = RobotMap::left_climber;
     right_climber = RobotMap::right_climber;
     climber_solenoid = RobotMap::climber_solenoid;
     brake_solenoid = RobotMap::brake_solenoid;
+    std::cout << "ClimberSubsystem constructor called ended." << std::endl;
 }
 
 void ClimberSubsystem::InitDefaultCommand() {
