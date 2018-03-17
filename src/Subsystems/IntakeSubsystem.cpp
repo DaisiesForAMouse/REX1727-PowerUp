@@ -20,35 +20,45 @@ void IntakeSubsystem::Toggle() {
 void IntakeSubsystem::SetIntake(IntakeAction i) {
     constexpr double pow = 0.75;
     switch (i) {
-        case intake:
+        case intake: {
             left_external_intake->Set(pow);
             right_external_intake->Set(-pow);
             break;
-        case outtake:
+        } case outtake: {
             left_external_intake->Set(-pow);
             right_external_intake->Set(pow);
             break;
-        case off:
+        } case spin_left: {
+            left_external_intake->Set(-pow);
+            right_external_intake->Set(-pow);
+            break;
+        } case spin_right: {
+            left_external_intake->Set(pow);
+            right_external_intake->Set(pow);
+            break;
+        } case off: {
             left_external_intake->StopMotor();
             right_external_intake->StopMotor();
             break;
+        }
     }
 }
 
 void IntakeSubsystem::SetPosition(PostionAction p) {
     switch (p) {
-        case deploy:
+        case deploy: {
             if (!opened) {
                 intake_solenoid->Set(frc::DoubleSolenoid::kForward);
                 opened = true;
             }
             break;
-        case grip:
+        } case grip: {
             if (opened) {
                 intake_solenoid->Set(frc::DoubleSolenoid::kReverse);
                 opened = false;
             }
             break;
+        }
     }
 }
 

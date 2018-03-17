@@ -1,6 +1,7 @@
 #ifndef DRIVE_SUBSYSTEM_HPP
 #define DRIVE_SUBSYSTEM_HPP
 
+#include <cmath>
 
 #include <Commands/Subsystem.h>
 #include <Drive/DifferentialDrive.h>
@@ -10,10 +11,13 @@
 
 class DriveSubsystem: public frc::Subsystem {
     public:
+        enum DriveSide {left, right, both};
         DriveSubsystem();
         void InitDefaultCommand() override;
         void Periodic() override;
         void SetDriveRaw(double left, double right, bool squared = true);
+        void DriveDist(double);
+        void Turn(double);
     private:
         std::shared_ptr<frc::Spark> left_drive;
         std::shared_ptr<frc::Spark> right_drive;

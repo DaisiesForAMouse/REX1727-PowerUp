@@ -21,7 +21,6 @@ class CubeCommand : public frc::Command {
         void Interrupted() override;
     private:
         static void DelayToggle(double);
-        static void DelayLauncher();
         void SetArm(ArmAction);
         void ToggleArm();
 };

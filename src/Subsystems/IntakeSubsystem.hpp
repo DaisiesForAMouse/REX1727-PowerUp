@@ -11,7 +11,7 @@
 
 class IntakeSubsystem : public frc::Subsystem {
     public:
-        enum IntakeAction {intake, outtake, off};
+        enum IntakeAction {intake, outtake, off, spin_left, spin_right};
         enum PostionAction {deploy = true, grip = false};
         IntakeSubsystem();
         void InitDefaultCommand() override;

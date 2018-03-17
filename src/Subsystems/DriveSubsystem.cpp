@@ -27,3 +27,38 @@ void DriveSubsystem::InitDefaultCommand() {
 
 void DriveSubsystem::Periodic() {
 }
+
+void DriveSubsystem::DriveDist(double dist) {
+    int sign = dist < 0 ? -1 : 1;
+    while (std::abs(left_drive_enc->GetDistance()) < std::abs(dist)) {
+        SetDriveRaw(sign*0.75, sign*0.75, false);
+    }
+}
+
+void DriveSubsystem::Turn(double deg) {
+    constexpr double pi = 3.14159265358979323846;
+    double dist = 24 * pi * (deg / 360);
+    int sign = dist < 0 ? -1 : 1;
+    while (std::abs(left_drive_enc->GetDistance()) < std::abs(dist)) {
+        SetDriveRaw(sign*0.50, -sign*0.50, false);
+    }
+}
+
+/* void DriveSubsystem::DriveDist(double dist, DriveSide side) { */
+/*     frc::Timer timer; */
+/*     timer.Reset(); */
+/*     timer.Start(); */
+/*     RobotMap::ResetEncoders(); */
+
+/*     int sign = 1; */
+/*     if (dist < 0) */
+/*         sign = -1; */
+
+/*     while (1) { */
+/*         if (std::abs(left_drive_enc->Get()) < std::abs(dist) && (side == left || side == both)) */
+/*             left_drive->Set(0.75 * sign); */
+/*         if (std::abs(right_drive_enc->Get()) < std::abs(dist) && (side == right || side == both)) */
+/*             right_drive->Set(0.75 * sign); */
+/*         if () */
+/*     } */
+/* } */

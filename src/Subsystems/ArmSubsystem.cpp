@@ -19,18 +19,19 @@ void ArmSubsystem::Toggle() {
 
 void ArmSubsystem::SetArm(ArmAction a) {
     switch (a) {
-        case lift:
+        case lift: {
             if (!raised) {
                 arm_solenoid->Set(frc::DoubleSolenoid::kForward);
                 raised = true;
             }
             break;
-        case drop:
+        } case drop: {
             if (raised) {
                 arm_solenoid->Set(frc::DoubleSolenoid::kReverse);
                 raised = false;
             }
             break;
+        }
     }
 }
 
@@ -38,18 +39,19 @@ void ArmSubsystem::SetIntake(IntakeAction i) {
     constexpr double pow = 1.0;
     auto mode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
     switch (i) {
-        case intake:
+        case intake: {
             left_internal_intake->Set(mode, pow);
             right_internal_intake->Set(mode, -pow);
             break;
-        case outtake:
+        } case outtake: {
             left_internal_intake->Set(mode, -pow);
             right_internal_intake->Set(mode, pow);
             break;
-        case off:
+        } case off: {
             left_internal_intake->Set(mode, 0);
             right_internal_intake->Set(mode, 0);
             break;
+        }
     }
 }
 
