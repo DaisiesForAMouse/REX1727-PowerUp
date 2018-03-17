@@ -23,7 +23,7 @@ void Robot::RobotInit() {
     RobotMap::init();
 
     oi = std::make_unique<OI>();
-    /* oi->SetDashboard(); */
+    oi->SetDashboard();
     oi->StartCameras();
 
     drive_subsystem = std::make_unique<DriveSubsystem>();
@@ -89,7 +89,7 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    if (auto_command_grp->IsRunning())
+    if (auto_command_grp->IsRunning() && !auto_command_grp)
         auto_command_grp->Cancel();
     drive_command->Start();
     cube_command->Start();
