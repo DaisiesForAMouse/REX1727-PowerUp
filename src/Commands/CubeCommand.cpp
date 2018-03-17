@@ -31,15 +31,29 @@ void CubeCommand::Execute() {
     else
         Robot::arm_subsystem->SetIntake(ArmSubsystem::off);
 
-    if (logitech->GetRawButtonPressed(7))
-        Robot::intake_subsystem->SetPosition(IntakeSubsystem::grip);
-    else if (logitech->GetRawButtonPressed(8))
-        Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
+    /* if (logitech->GetRawButtonPressed(7)) */
+    /*     Robot::intake_subsystem->SetPosition(IntakeSubsystem::grip); */
+    /* else if (logitech->GetRawButtonPressed(8)) */
+    /*     Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy); */
 
-    if (logitech->GetRawButton(9) || logitech->GetRawButton(2))
-        Robot::intake_subsystem->SetIntake(IntakeSubsystem::intake);
-    else if (logitech->GetRawButton(10))
+    if (logitech->GetRawButtonPressed(7) || logitech->GetRawButtonPressed(8))
+        Robot::intake_subsystem->Toggle();
+
+    /* if (logitech->GetRawButton(9) || logitech->GetRawButton(2)) */
+    /*     Robot::intake_subsystem->SetIntake(IntakeSubsystem::intake); */
+    /* else if (logitech->GetRawButton(10)) */
+    /*     Robot::intake_subsystem->SetIntake(IntakeSubsystem::outtake); */
+    /* else */
+    /*     Robot::intake_subsystem->SetIntake(IntakeSubsystem::off); */
+
+    if (logitech->GetRawButton(1))
         Robot::intake_subsystem->SetIntake(IntakeSubsystem::outtake);
+    else if (logitech->GetRawButton(2))
+        Robot::intake_subsystem->SetIntake(IntakeSubsystem::intake);
+    else if (logitech->GetRawButton(5))
+        Robot::intake_subsystem->SetIntake(IntakeSubsystem::spin_left);
+    else if (logitech->GetRawButton(3))
+        Robot::intake_subsystem->SetIntake(IntakeSubsystem::spin_right);
     else
         Robot::intake_subsystem->SetIntake(IntakeSubsystem::off);
 }

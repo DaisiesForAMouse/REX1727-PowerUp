@@ -5,7 +5,7 @@ DriveCommand::DriveCommand() : frc::Command() {
 }
 
 void DriveCommand::Initialize() {
-    std::cout << "DriveCommand initialized.";
+    std::cout << "DriveCommand initialized." << std::endl;
 }
 
 void DriveCommand::Execute() {

@@ -17,6 +17,23 @@ if [ ! -f "FRCUserProgram" ]; then
     exit 1
 fi
 
+if [ "$1" = "-e" ]; then
+    echo "Trying to connect on static ethernet..."
+    ping -c 1 -W 1.5 "10.$team_ip.2" > /dev/null 2>&1 ; ethernet=$?
+    if [ $ethernet -ne 0 ] ; then
+        echo "Connection failed on 10.$team_ip.2."
+        echo "Connection to roboRIO failed."
+        echo "deploy.sh: Exiting deploy process..."
+        exit 1
+    else
+        ssh "lvuser@10.$team_ip.2" "killall -9 FRCUserProgram && rm ~/FRCUserProgram && exit" > /dev/null 2>&1
+
+        scp "FRCUserProgram" "lvuser@10.$team_ip.2:~/FRCUserProgram"
+
+        echo "Deployed via static ethernet."
+    fi
+fi
+
 echo "First trying to connect on mDNS..."
 ping -c 1 -W 1.5 "roboRIO-$team-FRC.local" > /dev/null 2>&1 ; mDNS=$?
 if [ $mDNS -ne 0 ]; then
