@@ -11,13 +11,12 @@ void DropCommand::Initialize() {
 }
 
 void DropCommand::Execute() {
-    if (t.Get() > 1)
+    if (t.Get() > 0.5)
         Robot::arm_subsystem->SetIntake(ArmSubsystem::outtake);
 }
 
 bool DropCommand::IsFinished() {
-    // Probably won't last 10 seconds
-    return t.Get() > 10;
+    return t.Get() > 3;
 }
 
 void DropCommand::End() {

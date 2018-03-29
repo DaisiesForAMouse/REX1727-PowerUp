@@ -55,10 +55,10 @@ void ClimberSubsystem::SetClimbMotors(ClimberAction a) {
 void ClimberSubsystem::SetBrake(BrakePostition p) {
     switch (p) {
         case engage: {
-            brake_solenoid->Set(frc::DoubleSolenoid::kForward);
+            brake_solenoid->Set(frc::DoubleSolenoid::kReverse);
             break;
         } case disengage: {
-            brake_solenoid->Set(frc::DoubleSolenoid::kReverse);
+            brake_solenoid->Set(frc::DoubleSolenoid::kForward);
             break;
         }
     }

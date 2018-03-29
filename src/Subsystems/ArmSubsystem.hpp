@@ -23,5 +23,4 @@ class ArmSubsystem : public frc::Subsystem {
         std::shared_ptr<frc::DoubleSolenoid> arm_solenoid;
         std::shared_ptr<ctre::CANTalonSRX> left_internal_intake;
         std::shared_ptr<ctre::CANTalonSRX> right_internal_intake;
-        bool raised;
 };

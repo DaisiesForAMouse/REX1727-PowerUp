@@ -5,12 +5,11 @@ IntakeSubsystem::IntakeSubsystem() : frc::Subsystem("IntakeSubsystem") {
     left_external_intake = RobotMap::left_external_intake;
     right_external_intake = RobotMap::right_external_intake;
     intake_solenoid = RobotMap::intake_solenoid;
-    opened = intake_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false;
     std::cout << "IntakeSubsystem constructor ended." << std::endl;
 }
 
 void IntakeSubsystem::Toggle() {
-    if (opened) {
+    if (GetOpened()) {
         SetPosition(grip);
     } else {
         SetPosition(deploy);
@@ -19,7 +18,7 @@ void IntakeSubsystem::Toggle() {
 
 void IntakeSubsystem::SetIntake(IntakeAction i) {
     constexpr double p = 0.75;
-    constexpr double p_spin = 0.5;
+    constexpr double p_spin = 0.3;
     switch (i) {
         case intake: {
             left_external_intake->Set(p);
@@ -48,24 +47,33 @@ void IntakeSubsystem::SetIntake(IntakeAction i) {
 void IntakeSubsystem::SetPosition(PostionAction p) {
     switch (p) {
         case deploy: {
-            if (!opened) {
+            if (!GetOpened())
                 intake_solenoid->Set(frc::DoubleSolenoid::kForward);
-                opened = true;
-            }
             break;
         } case grip: {
-            if (opened) {
+            if (GetOpened())
                 intake_solenoid->Set(frc::DoubleSolenoid::kReverse);
-                opened = false;
-            }
             break;
         }
     }
 }
 
-void IntakeSubsystem::SetIntake(double pow) {
-    left_external_intake->Set(pow);
-    right_external_intake->Set(-pow);
+void IntakeSubsystem::SetIntake(double d) {
+    left_external_intake->Set(d);
+    right_external_intake->Set(-d);
+}
+
+void IntakeSubsystem::SetIntakeLeft(IntakeAction a) {
+    switch (a) {
+        case intake:
+            left_external_intake->Set(1.0);
+            break;
+        case outtake:
+            left_external_intake->Set(-1.0);
+            break;
+        default:
+            break;
+    }
 }
 
 void IntakeSubsystem::InitDefaultCommand() {
@@ -75,5 +83,5 @@ void IntakeSubsystem::Periodic() {
 }
 
 bool IntakeSubsystem::GetOpened() const {
-    return opened;
+    return intake_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false;
 }

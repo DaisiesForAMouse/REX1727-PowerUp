@@ -26,16 +26,18 @@ std::shared_ptr<frc::Joystick> OI::GetLogitech() const {
 }
 
 void OI::SetDashboard() {
+    /* frc::SmartDashboard::PutData( */
+    /*         "Left Distance PID", RobotMap::left_drive_dist_PID.get()); */
+    /* frc::SmartDashboard::PutData( */
+    /*         "Right Distance PID", RobotMap::right_drive_dist_PID.get()); */
     frc::SmartDashboard::PutData(
-            "Left Distance PID", RobotMap::left_drive_dist_PID.get());
+            "Left Vel PID", RobotMap::left_drive_vel_PID.get());
     frc::SmartDashboard::PutData(
-            "Right Distance PID", RobotMap::right_drive_dist_PID.get());
+            "Right Vel PID", RobotMap::right_drive_vel_PID.get());
     frc::SmartDashboard::PutData(
             "Left Drive Encoder", RobotMap::left_drive_enc.get());
     frc::SmartDashboard::PutData(
             "Right Drive Encoder", RobotMap::right_drive_enc.get());
-    frc::SmartDashboard::PutData(
-            "Power Distribution Board", RobotMap::pdp.get());
     frc::SmartDashboard::PutNumber(
             "Left Encoder Rate", RobotMap::left_drive_enc->GetRate());
     frc::SmartDashboard::PutNumber(
@@ -44,6 +46,19 @@ void OI::SetDashboard() {
             "Left Encoder Distance", RobotMap::left_drive_enc->Get());
     frc::SmartDashboard::PutNumber(
             "Right Encoder Distance", RobotMap::right_drive_enc->Get());
+    frc::SmartDashboard::PutBoolean(
+            "Arm Raised",
+            RobotMap::arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false);
+    frc::SmartDashboard::PutBoolean(
+            "Intake Out",
+            RobotMap::arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false);
+
+    /* frc::SmartDashboard::PutData( */
+    /*         "Power Distribution Board", RobotMap::pdp.get()); */
+    /* frc::SmartDashboard::PutData( */
+    /*             "Right Encoder Distance", RobotMap::left_drive.get()); */
+    /* frc::SmartDashboard::PutData( */
+    /*             "Right Encoder Distance", RobotMap::right_drive.get()); */
 }
 
 void OI::LifeCamThread() {
@@ -51,13 +66,13 @@ void OI::LifeCamThread() {
     auto cam = server->StartAutomaticCapture();
     cam.SetResolution(640, 480);
     cam.SetFPS(15);
-    //cam.SetPixelFormat(cs::VideoMode::PixelFormat::kGray);
     auto sink = server->GetVideo();
     auto output_stream = server->PutVideo("MS LifeCam", 640, 480);
-    cv::Mat source, output;
+    cv::Mat source;
+    cv::Mat output;
     while (true) {
         if (!sink.GrabFrame(source)) {
-            //cv::cvtColor(source, output, cv::COLOR_BGR2GRAY);
+            /* cv::cvtColor(source, output, cv::COLOR_BGR2GRAY); */
             output_stream.PutFrame(output);
         }
         else {

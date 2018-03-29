@@ -23,9 +23,9 @@ void CubeCommand::Execute() {
 
     if (xbox->GetTriggerAxis(left) > 0.25)
         Robot::arm_subsystem->SetIntake(-xbox->GetTriggerAxis(left));
-    else if (logitech->GetRawButton(11) || logitech->GetRawButton(2))
+    else if (logitech->GetRawButton(2))
         Robot::arm_subsystem->SetIntake(ArmSubsystem::intake);
-    else if (logitech->GetRawButton(12))
+    else if (logitech->GetRawButton(1))
         Robot::arm_subsystem->SetIntake(ArmSubsystem::outtake);
     else
         Robot::arm_subsystem->SetIntake(ArmSubsystem::off);
@@ -49,6 +49,8 @@ void CubeCommand::Execute() {
         Robot::intake_subsystem->SetIntake(IntakeSubsystem::outtake);
     else if (logitech->GetRawButton(2))
         Robot::intake_subsystem->SetIntake(IntakeSubsystem::intake);
+    else if (logitech->GetRawButton(12))
+        Robot::intake_subsystem->SetIntakeLeft(IntakeSubsystem::intake);
     else if (logitech->GetRawButton(5))
         Robot::intake_subsystem->SetIntake(IntakeSubsystem::spin_left);
     else if (logitech->GetRawButton(3))
@@ -73,7 +75,7 @@ void CubeCommand::SetArm(ArmAction a) {
         case lift: {
             Robot::intake_subsystem->SetPosition(IntakeSubsystem::deploy);
             Robot::arm_subsystem->SetArm(ArmSubsystem::lift);
-            std::thread t(DelayToggle, 1.0);
+            std::thread t(DelayToggle, 2.0);
             t.detach();
             break;
         } case drop: {

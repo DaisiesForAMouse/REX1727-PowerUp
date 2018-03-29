@@ -11,6 +11,7 @@ void Robot::RobotInit() {
     chooser.AddDefault("Left", 'L');
     chooser.AddObject("Middle", 'M');
     chooser.AddObject("Right", 'R');
+    chooser.AddObject("Baseline", 'B');
     frc::SmartDashboard::PutData("Starting position", &chooser);
 
     RobotMap::init();
@@ -30,6 +31,7 @@ void Robot::RobotInit() {
     climber_command = std::make_shared<ClimberCommand>();
 
     rumble_command = std::make_shared<RumbleCommand>();
+    veltune_command = std::make_shared<VelocityTuningCommand>();
 }
 
 void Robot::DisabledInit() {
@@ -50,7 +52,7 @@ void Robot::AutonomousInit() {
         game_data = "???";
 
     auto_command_grp = std::make_shared<AutoCommandGroup>(
-            std::move(game_data), std::move(position));
+            std::move(game_data), position);
 
     auto_command_grp->Start();
 }
@@ -61,18 +63,22 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    drive_command->Start();
+    /* drive_command->Start(); */
+    veltune_command->Start();
     cube_command->Start();
-    rumble_command->Start();
     climber_command->Start();
+    /* rumble_command->Start(); */
 }
 
 void Robot::TeleopPeriodic() {
     frc::Scheduler::GetInstance()->Run();
+    std::cout << RobotMap::left_drive_enc->GetRate() << '\t'
+              << RobotMap::right_drive_enc->GetRate() << '\t' << std::endl;
     oi->SetDashboard();
 }
 
 void Robot::TestPeriodic() {
+    oi->SetDashboard();
 }
 
 START_ROBOT_CLASS(Robot)

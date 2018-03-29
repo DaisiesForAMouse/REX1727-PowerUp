@@ -16,13 +16,13 @@ void DriveCommand::Execute() {
 
     if (xbox->GetTriggerAxis(right) >= 0.25) {
         Robot::drive_subsystem->SetDriveRaw(
-                xbox->GetY(left) * 0.4,
-                xbox->GetY(right) * 0.4,
+                xbox->GetY(left) * 0.5,
+                -xbox->GetY(right) * 0.5,
                 false);
     } else {
         Robot::drive_subsystem->SetDriveRaw(
                 xbox->GetY(left),
-                xbox->GetY(right),
+                -xbox->GetY(right),
                 true);
     }
 }

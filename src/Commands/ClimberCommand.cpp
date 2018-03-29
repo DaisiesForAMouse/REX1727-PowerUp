@@ -16,11 +16,13 @@ void ClimberCommand::Execute() {
     else if (logitech->GetRawButtonPressed(4))
         Robot::climber_subsystem->Deploy(ClimberSubsystem::down);
 
-    if (logitech->GetRawButtonPressed(11)) {
+    if (logitech->GetRawButton(11)) {
         Robot::climber_subsystem->SetBrake(ClimberSubsystem::disengage);
         Robot::climber_subsystem->SetClimbMotors(logitech->GetRawAxis(1));
-    } else if (logitech->GetRawButtonReleased(11)) {
+    } else if (!logitech->GetRawButton(11)) {
         Robot::climber_subsystem->SetBrake(ClimberSubsystem::engage);
+        Robot::climber_subsystem->SetClimbMotors(0);
+
     }
 }
 

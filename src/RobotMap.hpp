@@ -21,7 +21,8 @@
 #include <Compressor.h>
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <cscore_oo.h>
-
+#include <ADXRS450_Gyro.h>
+/* #include "AnglePIDOutput.h" */
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -44,6 +45,10 @@ class RobotMap {
         static std::shared_ptr<frc::PIDController> left_drive_dist_PID;
         static std::shared_ptr<frc::PIDController> right_drive_vel_PID;
         static std::shared_ptr<frc::PIDController> right_drive_dist_PID;
+        static std::shared_ptr<frc::ADXRS450_Gyro> spi_gyro;
+        static std::shared_ptr<frc::PIDController> angle_controller;
+        /* static std::shared_ptr<AnglePIDOutput> angle_output; */
+
 
         static std::shared_ptr<frc::VictorSP> left_climber;
         static std::shared_ptr<frc::VictorSP> right_climber;

@@ -8,7 +8,7 @@
 
 class DistanceCommand : public frc::Command {
     public:
-        DistanceCommand(double);
+        DistanceCommand(double,double);
         void Initialize() override;
         void Execute() override;
         bool IsFinished() override;
@@ -16,7 +16,7 @@ class DistanceCommand : public frc::Command {
         void Interrupted() override;
     private:
         double dist;
-        double p;
+        double speed;
         double const start_l;
         double const start_r;
 };

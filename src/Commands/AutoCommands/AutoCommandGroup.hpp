@@ -12,7 +12,7 @@
 
 class AutoCommandGroup : public frc::CommandGroup {
     public:
-        AutoCommandGroup(std::string&&, char&&);
+        AutoCommandGroup(std::string&&, char);
         void Initialize() override;
         void Execute() override;
         bool IsFinished() override;
