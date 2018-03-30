@@ -8,8 +8,10 @@ AutoCommandGroup::AutoCommandGroup(std::string&& info, char c):
     AddParallel(new DeployCommand());
     AddSequential(new DistanceCommand(107,36));
 
-    if (position == switch_pos && position != 'D')
+    if (position == switch_pos)
         AddSequential(new DropCommand());
+
+    /* AddSequential(new TurnCommand(90, 36, TurnCommand::left)); */
 }
 
 void AutoCommandGroup::Initialize() {

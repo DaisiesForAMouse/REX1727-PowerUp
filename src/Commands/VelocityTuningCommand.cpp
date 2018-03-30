@@ -2,7 +2,7 @@
  * VelocityTuningCommand.cpp
  *
  *  Created on: Mar 19, 2018
- *      Author: anton
+ *      Author: god or somebody idk
  */
 
 #include "VelocityTuningCommand.hpp"
@@ -26,6 +26,12 @@ void VelocityTuningCommand::Initialize() {
     RobotMap::left_drive_vel_PID->SetSetpoint(36);
     RobotMap::right_drive_vel_PID->Enable();
     RobotMap::left_drive_vel_PID->Enable();
+
+    /* left_pid_vals = { {0, 0, 0, 0} }; */
+    /* right_pid_vals = { {0, 0, 0, 0} }; */
+
+    /* frc::SmartDashboard::PutNumberArray("Left PID", left_pid_vals); */
+    /* frc::SmartDashboard::PutNumberArray("Right PID", right_pid_vals); */
 }
 
 void VelocityTuningCommand::Execute() {
@@ -67,6 +73,18 @@ void VelocityTuningCommand::Execute() {
     } else if (xbox->GetStartButtonPressed()) {
         pick = !pick;
     }
+
+    /* frc::SmartDashboard::PutNumberArray("Left PID", left_pid_vals); */
+    /* frc::SmartDashboard::PutNumberArray("Right PID", right_pid_vals); */
+
+    /* left_pid_vals = frc::SmartDashboard::GetNumberArray("Left PID", left_pid_vals); */
+    /* right_pid_vals = frc::SmartDashboard::GetNumberArray("Left PID", left_pid_vals); */
+
+    /* RobotMap::left_drive_vel_PID->SetPID( */
+    /*         left_pid_vals[0],left_pid_vals[1],left_pid_vals[2], left_pid_vals[3]); */
+
+    /* RobotMap::right_drive_vel_PID->SetPID( */
+    /*         right_pid_vals[0],right_pid_vals[1],right_pid_vals[2], right_pid_vals[3]); */
 }
 
 bool VelocityTuningCommand::IsFinished() {

@@ -63,8 +63,8 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
     RobotMap::ResetEncoders();
-    /* drive_command->Start(); */
-    veltune_command->Start();
+    drive_command->Start();
+    /* veltune_command->Start(); */
     cube_command->Start();
     climber_command->Start();
     /* rumble_command->Start(); */

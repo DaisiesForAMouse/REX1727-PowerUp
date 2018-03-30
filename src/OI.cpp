@@ -50,7 +50,8 @@ void OI::SetDashboard() {
     frc::SmartDashboard::PutBoolean(
             "Intake Out",
             RobotMap::arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false);
-
+    frc::SmartDashboard::PutBoolean(
+            "Compressor On", RobotMap::compressor->Enabled());
     /* frc::SmartDashboard::PutData( */
     /*         "Power Distribution Board", RobotMap::pdp.get()); */
     /* frc::SmartDashboard::PutData( */

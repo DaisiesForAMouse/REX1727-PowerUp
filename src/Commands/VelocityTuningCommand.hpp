@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <array>
+#include <vector>
 
 #include <Commands/Command.h>
 #include "../Robot.hpp"
@@ -20,4 +20,7 @@ class VelocityTuningCommand: public frc::Command {
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
+    private:
+        std::vector<double> left_pid_vals;
+        std::vector<double> right_pid_vals;
 };

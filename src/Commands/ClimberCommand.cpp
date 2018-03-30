@@ -22,7 +22,13 @@ void ClimberCommand::Execute() {
     } else if (!logitech->GetRawButton(11)) {
         Robot::climber_subsystem->SetBrake(ClimberSubsystem::engage);
         Robot::climber_subsystem->SetClimbMotors(0);
+    }
 
+    if (logitech->GetRawButtonPressed(10)) {
+        if (RobotMap::compressor->Enabled())
+            RobotMap::compressor->Stop();
+        else
+            RobotMap::compressor->Start();
     }
 }
 
