@@ -31,6 +31,7 @@ if [ "$1" = "-e" ]; then
         scp "FRCUserProgram" "lvuser@10.$team_ip.2:~/FRCUserProgram"
 
         echo "Deployed via static ethernet."
+        exit 1
     fi
 fi
 

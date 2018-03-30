@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <thread>
+#include <array>
 
 #include <XboxController.h>
 #include <Joystick.h>

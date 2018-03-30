@@ -74,8 +74,8 @@ void RobotMap::init() {
     right_drive_vel_PID->SetOutputRange(-1.0, 1.0);
     right_drive_vel_PID->Disable();
 
-    right_drive_vel_PID->SetPID(.0005,0.001,0,1/84.3);
-    left_drive_vel_PID->SetPID(.0005,0.001,0,1/84.3);
+    right_drive_vel_PID->SetPID(.0005, 0.001, 0, 1/84.3);
+    left_drive_vel_PID->SetPID(.0005, 0.001, 0, 1/84.3);
 
 //    right_drive_dist_PID = std::make_shared<frc::PIDController>(
 //            0, 0, 0, *right_drive_enc, *right_drive);

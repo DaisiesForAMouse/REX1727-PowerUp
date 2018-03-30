@@ -72,8 +72,6 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
     frc::Scheduler::GetInstance()->Run();
-    std::cout << RobotMap::left_drive_enc->GetRate() << '\t'
-              << RobotMap::right_drive_enc->GetRate() << '\t' << std::endl;
     oi->SetDashboard();
 }
 

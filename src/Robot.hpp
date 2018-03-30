@@ -48,6 +48,6 @@ class Robot : public frc::TimedRobot {
         std::shared_ptr<frc::Command> cube_command;
         std::shared_ptr<frc::Command> rumble_command;
         std::shared_ptr<frc::Command> climber_command;
-        std::shared_ptr<frc::CommandGroup> auto_command_grp;
         std::shared_ptr<frc::Command> veltune_command;
+        std::shared_ptr<frc::CommandGroup> auto_command_grp;
 };

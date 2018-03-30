@@ -26,10 +26,6 @@ std::shared_ptr<frc::Joystick> OI::GetLogitech() const {
 }
 
 void OI::SetDashboard() {
-    /* frc::SmartDashboard::PutData( */
-    /*         "Left Distance PID", RobotMap::left_drive_dist_PID.get()); */
-    /* frc::SmartDashboard::PutData( */
-    /*         "Right Distance PID", RobotMap::right_drive_dist_PID.get()); */
     frc::SmartDashboard::PutData(
             "Left Vel PID", RobotMap::left_drive_vel_PID.get());
     frc::SmartDashboard::PutData(
@@ -41,11 +37,13 @@ void OI::SetDashboard() {
     frc::SmartDashboard::PutNumber(
             "Left Encoder Rate", RobotMap::left_drive_enc->GetRate());
     frc::SmartDashboard::PutNumber(
-            "Right Encoder Rate", RobotMap::right_drive_enc->GetRate());
+            "Right Encoder Rate", -RobotMap::right_drive_enc->GetRate());
     frc::SmartDashboard::PutNumber(
-            "Left Encoder Distance", RobotMap::left_drive_enc->Get());
+            "Difference",
+            RobotMap::left_drive_enc->GetDistance() + RobotMap::right_drive_enc->GetDistance());
     frc::SmartDashboard::PutNumber(
-            "Right Encoder Distance", RobotMap::right_drive_enc->Get());
+            "Velocity Difference",
+            RobotMap::left_drive_enc->GetRate() + RobotMap::right_drive_enc->GetRate());
     frc::SmartDashboard::PutBoolean(
             "Arm Raised",
             RobotMap::arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false);
