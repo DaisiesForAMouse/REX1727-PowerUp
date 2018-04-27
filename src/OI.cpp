@@ -52,12 +52,6 @@ void OI::SetDashboard() {
             RobotMap::arm_solenoid->Get() == frc::DoubleSolenoid::kForward ? true : false);
     frc::SmartDashboard::PutBoolean(
             "Compressor On", RobotMap::compressor->Enabled());
-    /* frc::SmartDashboard::PutData( */
-    /*         "Power Distribution Board", RobotMap::pdp.get()); */
-    /* frc::SmartDashboard::PutData( */
-    /*             "Right Encoder Distance", RobotMap::left_drive.get()); */
-    /* frc::SmartDashboard::PutData( */
-    /*             "Right Encoder Distance", RobotMap::right_drive.get()); */
 }
 
 void OI::LifeCamThread() {
@@ -71,7 +65,6 @@ void OI::LifeCamThread() {
     cv::Mat output;
     while (true) {
         if (!sink.GrabFrame(source)) {
-            /* cv::cvtColor(source, output, cv::COLOR_BGR2GRAY); */
             output_stream.PutFrame(output);
         }
         else {
